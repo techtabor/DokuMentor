@@ -28,7 +28,7 @@ encType="multipart/form-data">
 <h2>Feltöltött fájlok</h2>
 <ul>
     <% files.forEach(function(file) { %>
-        <li><%= file %><!-- - <%= file.drunkness %>--></li>
+        <li><a href=<%= "/file/" + file %> > <%= file %> </a></li> 
     <% }); %>
 </ul>
 

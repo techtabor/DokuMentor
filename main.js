@@ -25,6 +25,8 @@ app.post('/upload', function(req, res) {
   });
 });
 
+app.use('/file', express.static(dir));
+
 app.get('/', (req, res) => {
   //res.sendFile(__dirname+'/views/pages/index.html')
   fs.readdir(dir, (err, files) => {
