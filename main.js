@@ -1,7 +1,10 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const app = express();
- 
+const fs = require('fs');
+
+const dir = './uploads/';
+
 // default options
 app.use(fileUpload());
  
@@ -14,7 +17,7 @@ app.post('/upload', function(req, res) {
  
   // Use the mv() method to place the file somewhere on your server
   //console.log(sampleFile.name);
-  sampleFile.mv(__dirname+'/uploads/'+sampleFile.name, function(err) {
+  sampleFile.mv(dir+sampleFile.name, function(err) {
     if (err)
       return res.status(500).send(err);
  
@@ -22,6 +25,10 @@ app.post('/upload', function(req, res) {
   });
 });
 
-app.get('/', (req, res) => res.sendFile(__dirname+"/index.html"))
+app.get('/', (req, res) => res.sendFile(__dirname+'/index.html'));
 
+
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+}
 app.listen(8000, () => console.log('Example app listening on port 3000!'));
