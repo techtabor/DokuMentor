@@ -6,6 +6,7 @@ const fs = require('fs');
 const dir = './uploads/';
 
 // default options
+app.set('view engine', 'ejs');
 app.use(fileUpload());
  
 app.post('/upload', function(req, res) {
@@ -15,8 +16,7 @@ app.post('/upload', function(req, res) {
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   let sampleFile = req.files.sampleFile;
  
-  // Use the mv() method to place the file somewhere on your server
-  //console.log(sampleFile.name);
+  // Fájl áthelyezése
   sampleFile.mv(dir+sampleFile.name, function(err) {
     if (err)
       return res.status(500).send(err);
@@ -25,8 +25,22 @@ app.post('/upload', function(req, res) {
   });
 });
 
-app.get('/', (req, res) => res.sendFile(__dirname+'/index.html'));
+app.get('/', (req, res) => {
+  //res.sendFile(__dirname+'/views/pages/index.html')
+  fs.readdir(dir, (err, files) => {
+    res.render('pages/index.ejs', {
+      files: files
+    });
+  });
+});
 
+app.get('/list', (req, res) => {
+  fs.readdir(dir, (err, files) => {
+    res.render('pages/list.ejs', {
+      files: files
+    });
+  });
+});
 
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);

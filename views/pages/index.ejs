@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>DokuMentor</h1>
+        <p>A jegyzetmegosztás jövője</p>
+    </div>
+</main>
+
+<form ref='uploadForm' 
+id='uploadForm' 
+action='http://localhost:8000/upload' 
+method='post' 
+encType="multipart/form-data">
+  <input type="file" name="sampleFile" />
+  <input type='submit' value='Upload!' />
+</form>     
+
+<h2>Feltöltött fájlok</h2>
+<ul>
+    <% files.forEach(function(file) { %>
+        <li><%= file %><!-- - <%= file.drunkness %>--></li>
+    <% }); %>
+</ul>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+</body>
+</html>
