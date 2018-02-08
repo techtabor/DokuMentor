@@ -1,11 +1,22 @@
 {
-  "name": "myapp",
-  "description": "a really cool app",
+  "name": "node-example",
   "version": "1.0.0",
-  "engines": {
-    "node": "8.9.4"
-  },
+  "description": "This example is so cool.",
+  "main": "web.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node main.js"
+  },
+  "keywords": [
+    "example",
+    "heroku"
+  ],
+  "author": "jane-doe",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.9.8"
+  },
+  "engines": {
+    "node": "4.1.1"
   }
 }
