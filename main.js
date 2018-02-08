@@ -10,6 +10,8 @@ app.use(fileUpload());
 //Feltöltött fájlok helye
 const dir = './uploads/';
 
+const port = 3000;
+
 
 //Főoldal
 app.get('/', (req, res) => {
@@ -44,4 +46,4 @@ app.post('/upload', function(req, res) {
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
 }
-app.listen(8000, () => console.log('DokuMentor is available on port 3000!'));
+app.listen(port, () => console.log('DokuMentor is available on port ' + port + '!'));
