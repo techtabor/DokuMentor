@@ -42,7 +42,7 @@ app.post('/upload', function(req, res) {
   });
 });
 
-//próba megjegyzés
+//próbabranchbe
 //Szerver indítása, tárolómappa létrehozása
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
