@@ -10,7 +10,7 @@ app.use(fileUpload());
 //Feltöltött fájlok helye
 const dir = './uploads/';
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 
 //Főoldal
