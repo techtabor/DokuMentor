@@ -10,14 +10,13 @@ app.use(fileUpload());
 //Feltöltött fájlok helye
 const dir = './uploads/';
 
-const port = 3000;
+const port = 8080;
 
 
 //Főoldal
 app.get('/', (req, res) => {
   fs.readdir(dir, (err, files) => {
     res.render('pages/index.ejs', {
-      port: port,
       files: files
     });
   });
@@ -38,8 +37,7 @@ app.post('/upload', function(req, res) {
   sampleFile.mv(dir+sampleFile.name, function(err) {
     if (err)
     return res.status(500).send(err);
-    //res.send('File uploaded!');
-    res.redirect('/')
+    res.redirect('/');
   });
 });
 
@@ -47,4 +45,4 @@ app.post('/upload', function(req, res) {
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
 }
-app.listen(port, () => console.log('DokuMentor is available on port ' + port + '!'));
+app.listen(port, '0.0.0.0', () => console.log('DokuMentor is available on port ' + port + '!'));
