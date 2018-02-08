@@ -42,10 +42,6 @@ app.post('/upload', function(req, res) {
   });
 });
 
-<<<<<<< HEAD
-=======
-//próbabranchbe
->>>>>>> probabranch
 //Szerver indítása, tárolómappa létrehozása
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
