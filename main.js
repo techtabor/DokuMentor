@@ -17,6 +17,7 @@ const port = 3000;
 app.get('/', (req, res) => {
   fs.readdir(dir, (err, files) => {
     res.render('pages/index.ejs', {
+      port: port,
       files: files
     });
   });
