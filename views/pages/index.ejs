@@ -17,7 +17,7 @@
 </main>
 
 <form ref='uploadForm' 
-id='uploadForm' 
+id='uploadForm'
 action='/upload'
 method='post' 
 encType="multipart/form-data">
@@ -25,12 +25,7 @@ encType="multipart/form-data">
   <input type='submit' value='Feltöltés' />
 </form>     
 
-<h2>Feltöltött fájlok</h2>
-<ul>
-    <% files.forEach(function(file) { %>
-        <li><a href=<%= "/file/" + file %> > <%= file %> </a></li> 
-    <% }); %>
-</ul>
+<% include ../partials/uploads %>
 
 <footer>
     <% include ../partials/footer %>
