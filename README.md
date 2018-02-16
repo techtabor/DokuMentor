@@ -1,2 +1,2 @@
 # DokuMentor
-Demo (a fájlok automatikusan törlődnek egy idő után): [DokuMentor](https://dokumentor.herokuapp.com/)
+Elérhető egy kezdetleges demo/illusztráció [itt](https://dokumentor.herokuapp.com/). (A feltöltött fájlok egy idő után törlődnek.)
