@@ -1,2 +1,2 @@
 # DokuMentor
-Elérhető egy kezdetleges demo/illusztráció [itt](https://dokumentor.herokuapp.com/). (A feltöltött fájlok egy idő után törlődnek.)
+[AWS](18.195.57.19:3000/)
