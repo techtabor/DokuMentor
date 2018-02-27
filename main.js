@@ -12,8 +12,7 @@ const dir = './uploads/';
 
 const port = process.env.PORT || 3000;
 
-
-//Főoldal
+//Oldalak:
 app.get('/', (req, res) => {
   fs.readdir(dir, (err, files) => {
     res.render('pages/home.ejs', {
@@ -34,29 +33,24 @@ app.get('/search', (req, res) => {
   });
 });
 
-
-
-
-//A /file elérési úttal tudjuk elérni a feltöltött fájlokat
+//A /file elérési úttal tudjuk elérni a feltöltött fájlokat a $dir mappából
 app.use('/file', express.static(dir));
 
-
-//Fájl feltöltése (html post)
+//Fájl feltöltése
 app.post('/fileupload', function(req, res) {
   if (!req.files)
-  return res.status(400).send('No files were uploaded.');
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  var sampleFile = req.files.files;
+  return res.status(400).send('Nincs feltöltött fájl.');
+  //Ha nem létezik a mappa, hozza létre
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+  //A küldött fájl:
+  var uploadedFile = req.files.files;
   // Fájl áthelyezése
-  sampleFile.mv(dir+sampleFile.name, function(err) {
+  uploadedFile.mv(dir+uploadedFile.name, function(err) {
     if (err)
     return res.status(500).send(err);
     res.redirect('/');
   });
 });
 
-//Szerver indítása, tárolómappa létrehozása
-if (!fs.existsSync(dir)){
-    fs.mkdirSync(dir);
-}
+//Szerver indítása
 app.listen(port, '0.0.0.0', () => console.log('DokuMentor is available on port ' + port + '!'));
