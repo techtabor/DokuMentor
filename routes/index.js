@@ -1,19 +1,9 @@
-const express = require('express');
-const fileUpload = require('express-fileupload');
-const app = express();
+var express = require('express');
+var router = express.Router();
+
 const fs = require('fs');
-
-app.set('view engine', 'ejs');
-app.use(fileUpload());
-
-
-//Feltöltött fájlok helye
 const dir = './uploads/';
-
-const port = process.env.PORT || 3000;
-
-//Oldalak:
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   fs.readdir(dir, (err, files) => {
     res.render('pages/home.ejs', {
       files: files
@@ -21,11 +11,11 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get('/upload', (req, res) => {
+router.get('/upload', (req, res) => {
   res.render('pages/fileupload.ejs');
 });
 
-app.get('/search', (req, res) => {
+router.get('/search', (req, res) => {
   fs.readdir(dir, (err, files) => {
     res.render('pages/search.ejs', {
       files: files
@@ -34,10 +24,10 @@ app.get('/search', (req, res) => {
 });
 
 //A /file elérési úttal tudjuk elérni a feltöltött fájlokat a $dir mappából
-app.use('/file', express.static(dir));
+router.use('/file', express.static(dir));
 
 //Fájl feltöltése
-app.post('/fileupload', function(req, res) {
+router.post('/fileupload', function(req, res) {
   if (!req.files)
   return res.status(400).send('Nincs feltöltött fájl.');
   //Ha nem létezik a mappa, hozza létre
@@ -52,5 +42,4 @@ app.post('/fileupload', function(req, res) {
   });
 });
 
-//Szerver indítása
-app.listen(port, '0.0.0.0', () => console.log('DokuMentor is available on port ' + port + '!'));
+module.exports = router;
