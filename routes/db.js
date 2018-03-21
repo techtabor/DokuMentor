@@ -29,17 +29,19 @@ function handleDisconnect() {
 
 //Főoldal
 router.get('/all', (req, res) => {
-    connection.query('SELECT * from new_view', function(err, rows, fields) {
+    fetchActors(res,"SELECT * FROM new_view");
+    /*connection.query('SELECT * from new_view', function(err, rows, fields) {
     if (!err) fetchActors(res);
     else console.log('Error while performing Query.');
-    });
+    });*/
 });
 
 router.get('/dg/:docgroupid', (req, res) => {
-    connection.query('SELECT * from new_view WHERE docg_id='+req.params.docgroupid, function(err, rows, fields) {
+    fetchActors(res,"SELECT * FROM new_view WHERE docg_id="+req.params.docgroupid);
+    /*connection.query('SELECT * from new_view WHERE docg_id='+req.params.docgroupid, function(err, rows, fields) {
     if (!err) fetchActors(res);
     else console.log('Error while performing Query.');
-    });
+    });*/
 });
 
 //TESZT:
@@ -52,8 +54,8 @@ function executeQuery(sql, cb) {
     });
 }
 //Prints actors table
-function fetchActors(res){
-        executeQuery("SELECT * FROM new_view", function(result){
+function fetchActors(res, sql){
+        executeQuery(sql, function(result){
         res.write("<!DOCTYPE html><meta charset=\"UTF-8\">");
         res.write("<table>");
         res.write("<tr>");
