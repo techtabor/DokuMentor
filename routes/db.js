@@ -36,7 +36,7 @@ router.get('/all', (req, res) => {
 });
 
 router.get('/dg/:docgroupid', (req, res) => {
-    connection.query('SELECT * from new_view WHERE docg_id='+req.docgroupid, function(err, rows, fields) {
+    connection.query('SELECT * from new_view WHERE docg_id='+req.params.docgroupid, function(err, rows, fields) {
     if (!err) fetchActors(res);
     else console.log('Error while performing Query.');
     });
