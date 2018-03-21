@@ -4,8 +4,8 @@ var router = express.Router();
 //Külső config fájl betöltése:
 var config = require('../config.js').get(process.env.NODE_ENV);
 
+var mysql = require('mysql');
 var connection;
-
 function handleDisconnect() {
   connection = mysql.createConnection(config.databaseconnection); // Recreate the connection, since
                                                   // the old one cannot be reused.
