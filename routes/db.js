@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 //Külső config fájl betöltése:
-var config = require('./config.js').get(process.env.NODE_ENV);
+var config = require('../config.js').get(process.env.NODE_ENV);
 
 var connection;
 
