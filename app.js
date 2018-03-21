@@ -14,10 +14,7 @@ var config = require('./config.js').get(process.env.NODE_ENV);
 var index = require('./routes/index');
 app.use('/', index);
 
-//MySQL
-var mysql = require('mysql');
-
-
+//Adatbázis:
 var db = require('./routes/db')();
 app.use('/db', db);
 

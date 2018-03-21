@@ -35,6 +35,13 @@ router.get('/all', (req, res) => {
     });
 });
 
+router.get('/dg/:docgroupid', (req, res) => {
+    connection.query('SELECT * from new_view WHERE docg_id='+req.docgroupid, function(err, rows, fields) {
+    if (!err) fetchActors(res);
+    else console.log('Error while performing Query.');
+    });
+});
+
 //TESZT:
 //FUNCTIONS
 //Exectues queries on declared db (it can be extended if you want to use more than one db)
