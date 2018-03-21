@@ -4,7 +4,7 @@ var config = {
     default: {
       port: 3000,
       databaseconnection: {
-        host: "18.195.57.19",
+        host: "localhost",
         user: "nodeaccess",
         password: "b1T1fJAU",
         database: "dokumentor"
