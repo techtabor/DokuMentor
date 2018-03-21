@@ -14,6 +14,12 @@ var config = require('./config.js').get(process.env.NODE_ENV);
 var index = require('./routes/index');
 app.use('/', index);
 
+//MySQL
+var mysql = require('mysql');
+var connection = mysql.createConnection( config.databaseconnection );
+var db = require('./routes/db')(connection);
+app.use('/db', db);
+
 
 //Ez a rész csak akkor működik, ha  indítás előtt kiadjuk a nodeenv='development' parancsot
 // catch 404 and forward to error handler

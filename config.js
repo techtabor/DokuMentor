@@ -3,10 +3,11 @@
 var config = {
     default: {
       port: 3000,
-      database: {
-        host: "localhost",
-        user: "localuser",
-        password: "localpass"
+      databaseconnection: {
+        host: "18.195.57.19",
+        user: "nodeaccess",
+        password: "b1T1fJAU",
+        database: "dokumentor"
       }
     }
   }

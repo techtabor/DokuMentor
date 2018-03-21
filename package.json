@@ -1,27 +1,19 @@
 {
   "name": "dokumentor",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
-  "dependencies": {
-    "ejs": "^2.5.7",
-    "express": "^4.16.2",
-    "express-fileupload": "^0.4.0"
-  },
-  "devDependencies": {},
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main.js"
-    
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/techtabor/DokuMentor.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/techtabor/DokuMentor/issues"
-  },
-  "homepage": "https://github.com/techtabor/DokuMentor#readme"
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.15.5",
+    "express-fileupload": "^0.4.0",
+    "morgan": "~1.9.0",
+    "mysql": "^2.15.0",
+    "serve-favicon": "~2.4.5"
+  }
 }

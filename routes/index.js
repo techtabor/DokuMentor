@@ -1,8 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
+
 const fs = require('fs');
 const dir = './uploads/';
+
+
+//Főoldal
 router.get('/', (req, res) => {
   fs.readdir(dir, (err, files) => {
     res.render('pages/home.ejs', {
@@ -11,10 +15,12 @@ router.get('/', (req, res) => {
   });
 });
 
+//Feltöltés oldal
 router.get('/upload', (req, res) => {
   res.render('pages/fileupload.ejs');
 });
 
+//Keresés oldal
 router.get('/search', (req, res) => {
   fs.readdir(dir, (err, files) => {
     res.render('pages/search.ejs', {
