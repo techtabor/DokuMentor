@@ -10,21 +10,25 @@ const dir = './uploads/';
 router.get('/', (req, res) => {
   fs.readdir(dir, (err, files) => {
     res.render('pages/home.ejs', {
-      files: files
+      files: files,
+      user: req.user
     });
   });
 });
 
 //Feltöltés oldal
 router.get('/upload', (req, res) => {
-  res.render('pages/fileupload.ejs');
+  res.render('pages/fileupload.ejs', {
+    user: req.user
+  });
 });
 
 //Keresés oldal
 router.get('/search', (req, res) => {
   fs.readdir(dir, (err, files) => {
     res.render('pages/search.ejs', {
-      files: files
+      files: files,
+      user: req.user
     });
   });
 });
