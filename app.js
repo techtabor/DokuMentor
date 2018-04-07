@@ -3,6 +3,8 @@ const fileUpload = require('express-fileupload');
 
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const passportSetup = require('./controllers/passport-setup');
+
 const Sequelize = require('sequelize');
 
 const app = express();
