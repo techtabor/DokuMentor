@@ -21,6 +21,5 @@ router.use(function(req, res, next) {
     res.status(err.status || 500);
     res.render('pages/error');
 });
-console.log('This shit is loaded.');
 
 module.exports = router;
