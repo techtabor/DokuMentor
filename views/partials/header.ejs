@@ -37,7 +37,7 @@
                 <% } %>
                 <li><a href="/profile">
                     <span class="glyphicon glyphicon-user"></span>
-                    Profil</a>
+                    Profil<% if (user) { %> (<%=user.name%>)<% } %></a>
                 </li>
             </ul>
             
