@@ -24,6 +24,21 @@
                     <span class="glyphicon glyphicon-search"></span>
                     Keresés</a>
                 </li>
+                <% if (user) { %>
+                <li><a href="/auth/logout">
+                    <span class="glyphicon glyphicon-log-out"></span>
+                    Kijelentkezés</a>
+                </li>
+                <% } else { %>
+                <li><a href="/auth/login">
+                    <span class="glyphicon glyphicon-log-in"></span>
+                    Bejelentkezés</a>
+                </li>
+                <% } %>
+                <li><a href="/profile">
+                    <span class="glyphicon glyphicon-user"></span>
+                    Profil</a>
+                </li>
             </ul>
             
         </div>
@@ -33,6 +48,6 @@
     <main>
         <div class="jumbotron">
             <h1>DokuMentor</h1>
-            <p>Valami szlogenszerű felirat helye</p>
+            <p>:)</p>
         </div>
     </main>

@@ -9,7 +9,11 @@
     <% include ../partials/header %>
 </header>
 
-<% include ../partials/uploads %>
+<h3>Profil</h3>
+<p>Név: <%=user.name%></p>
+<p>Email: <%=user.email%></p>
+<p>Azonosító: <%=user.key%></p>
+<p>Csatlakozott: <%=user.created%></p>
 
 <footer>
     <% include ../partials/footer %>
