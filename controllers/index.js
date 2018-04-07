@@ -3,9 +3,9 @@ const router = express.Router()
 
 //Az összes elérési út kezelőjének betöltése
 router.use('/', require('./homepages'));
-router.use('/db', require('./db')());
-
-//require('./database')();
+router.use('/db', require('./db'));
+router.use('/auth', require('./auth'));
+router.use('/profile', require('./profile'));
 
 router.use(function(req, res, next) {
     var err = new Error('Not Found');
