@@ -1,39 +1,29 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
+
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+const Sequelize = require('sequelize');
+
 const app = express();
 const fs = require('fs');
 
+//Külső config fájl betöltése:
+const config = require('./config/config.js').get(process.env.NODE_ENV);
+
 app.set('view engine', 'ejs');
 app.use(fileUpload());
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: [config.session.cookieKey]
+}));
 
-//Külső config fájl betöltése:
-var config = require('./config.js').get(process.env.NODE_ENV);
+//Passport.js betöltése
+app.use(passport.initialize());
+app.use(passport.session());
 
-
-//Elérési utak külön fájlban:
-var index = require('./routes/index');
-app.use('/', index);
-
-//Adatbázis:
-var db = require('./routes/db')();
-app.use('/db', db);
-
-//Ez a rész csak akkor működik, ha  indítás előtt kiadjuk a nodeenv='development' parancsot
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  // render the error page
-  res.status(err.status || 500);
-  res.render('pages/error');
-});
+//Elérési utak külön fájlban: (.controllers/index.js !!!)
+app.use(require('./controllers'));
 
 //Szerver indítása
 app.listen(config.port, '0.0.0.0', () => console.log('DokuMentor is available on port ' + config.port + '!'));
