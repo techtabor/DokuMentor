@@ -2,7 +2,7 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-const passportSetup = require('./app/passport-setup');
+const passportSetup = require('./controllers/passport-setup');
 const Sequelize = require('sequelize');
 const fs = require('fs');
 
@@ -30,7 +30,7 @@ require("./models").sequelize.sync().then(function() {
 });
 
 //Elérési utak betöltése
-app.use(require('./routers'));
+app.use(require('./routes'));
 
 //Szerver indítása
 app.listen(config.port, '0.0.0.0', () => console.log('A DokuMentor alkalmazás erérhető a következő porton: ' + config.port + '.'));
