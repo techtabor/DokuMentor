@@ -21,10 +21,7 @@ passport.use(
 
         User.findOrCreate({where: {key: profile.id}, defaults: {name: profile.displayName, email: profile.emails[0].value}})
         .spread(function(user, created) {
-            console.log(user.get({
-                plain: true
-            }))
-            console.log('Új?', created);
+            if (created) console.log('Új felhasználó: ', user.name)
             done(null, profile);
         });
     })
