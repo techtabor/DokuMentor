@@ -26,10 +26,4 @@ module.exports = function(sequelize, DataTypes){
           allowNull: false
         }
     });
-}; 
-/*
-const User = mongoose.model('user', userSchema);*/
-/*
-User.findAll().then(function(users) {
-    console.log(users)
-})*/
+};
