@@ -6,13 +6,13 @@ var config = require('../config/config.js').get(process.env.NODE_ENV);
 const models = require('../models/');
 
 router.get('/alluser', (req, res) => {
-    models.users.findAll().then( (result)=>{
+    models.User.findAll().then( (result)=>{
           res.send(result);
       });
 });
 
 router.get('/user/:userid', (req, res) => {
-      models.users.findById(req.params.userid).then((result) =>{
+      models.User.findById(req.params.userid).then((result) =>{
             res.send(result);
       });
 });
