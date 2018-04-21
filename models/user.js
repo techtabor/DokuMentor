@@ -1,13 +1,7 @@
 const Sequelize = require('sequelize');
 
 module.exports = function(sequelize, DataTypes){
-    return User = sequelize.define('users', {
-        user_id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-          allowNull: false
-        },
+     var User = sequelize.define('User', {
         name: {
           type: Sequelize.STRING,
           allowNull: false
@@ -20,10 +14,16 @@ module.exports = function(sequelize, DataTypes){
           type: Sequelize.STRING,
           allowNull: false
         },
-        created: {
+        add_date: {
           type: 'TIMESTAMP',
           defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
           allowNull: false
         }
     });
+
+    User.associate = function(models) {
+      models.User.hasMany(models.Document);
+    };
+    
+    return User;
 };
