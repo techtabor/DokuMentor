@@ -1,0 +1,77 @@
+<% include ../partials/head %>
+<body>
+    <% include ../partials/navbar %>
+    <div class="container" style="padding-top:6em">
+      <div class="bs-docs-section">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="page-header">
+                <h1 id="forms">Új dokumentum létrehozása</h1>
+              </div>
+            </div>
+          </div>
+  
+          <div class="row">
+            <!-- <div class="col-lg-6">  -->
+            <div class="col-lg-1"></div>
+            <div class="col-lg-8">
+              <div class="bs-component">
+                <form lpformnum="1" action="/createdocument" method="GET">
+                  <fieldset>
+                    <legend>Feltöltő</legend>
+                    <div class="form-group row">
+                      <label for="staticName" class="col-sm-2 col-form-label">Név</label>
+                      <div class="col-sm-10">
+                        <input type="text" readonly="" class="form-control-plaintext" id="staticName" value="<%=user.name%>">
+                        <small>Nem Te vagy? <a href="/auth/logout">Kijelentkezés.</a></small>
+                      </div>
+                    </div>
+                    <legend>Dokumentum</legend>
+                    <div class="form-group">
+                      <label name="title" class="col-form-label" for="inputTitle">Cím</label>
+                      <input required type="text" class="form-control" placeholder="" id="inputTitle">
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label" for="inputUniversity">Egyetem</label>
+                      <input required type="text" class="form-control" placeholder="" id="inputUniversity">
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label" for="inputCourse">Szak</label>
+                      <input required type="text" class="form-control" placeholder="" id="inputCourse">
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label" for="inputSemester">Félév</label>
+                      <input type="number" class="form-control" placeholder="" id="inputSemester">
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label" for="inputTeacher">Tanár</label>
+                      <input type="text" class="form-control" placeholder="" id="inputTeacher">
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label" for="inputDate">Dátum</label>
+                      <input type="date" class="form-control" placeholder="" id="inputDate">
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label" for="inputTags">Kulcsszavak</label>
+                      <input type="text" class="form-control" placeholder="" id="inputTags">
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label" for="inputDescription">Leírás</label>
+                      <textarea class="form-control" id="inputDescription" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label" for="exampleInputFile">Fájlok feltöltése</label>
+                      <input required type="file" multiple accept= "image/*, .pdf, .doc, .docx, application/msword" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                      <small id="fileHelp" class="form-text text-muted">Később is adhatsz hozzá fájlokat.</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Létrehozás</button>
+                  </fieldset>
+                </form>
+              <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
+            </div>
+          </div>
+        </div>
+  
+
+    </div>
+</body>
