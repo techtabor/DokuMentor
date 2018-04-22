@@ -16,7 +16,7 @@
             <div class="col-lg-1"></div>
             <div class="col-lg-8">
               <div class="bs-component">
-                <form lpformnum="1" action="/createdocument" method="GET">
+                <form lpformnum="1" action="/db/createdocument" method="POST" encType="multipart/form-data">
                   <fieldset>
                     <legend>Feltöltő</legend>
                     <div class="form-group row">
@@ -28,40 +28,40 @@
                     </div>
                     <legend>Dokumentum</legend>
                     <div class="form-group">
-                      <label name="title" class="col-form-label" for="inputTitle">Cím</label>
-                      <input required type="text" class="form-control" placeholder="" id="inputTitle">
+                      <label class="col-form-label" for="inputTitle">Cím</label>
+                      <input required name="title" type="text" class="form-control" placeholder="" id="inputTitle">
                     </div>
                     <div class="form-group">
                       <label class="col-form-label" for="inputUniversity">Egyetem</label>
-                      <input required type="text" class="form-control" placeholder="" id="inputUniversity">
+                      <input required name="university" type="text" class="form-control" placeholder="" id="inputUniversity">
                     </div>
                     <div class="form-group">
                       <label class="col-form-label" for="inputCourse">Szak</label>
-                      <input required type="text" class="form-control" placeholder="" id="inputCourse">
+                      <input required name="course" type="text" class="form-control" placeholder="" id="inputCourse">
                     </div>
                     <div class="form-group">
                       <label class="col-form-label" for="inputSemester">Félév</label>
-                      <input type="number" class="form-control" placeholder="" id="inputSemester">
+                      <input type="number" name="semester" class="form-control" placeholder="" id="inputSemester">
                     </div>
                     <div class="form-group">
                       <label class="col-form-label" for="inputTeacher">Tanár</label>
-                      <input type="text" class="form-control" placeholder="" id="inputTeacher">
+                      <input type="text" name="teacher" class="form-control" placeholder="" id="inputTeacher">
                     </div>
                     <div class="form-group">
                       <label class="col-form-label" for="inputDate">Dátum</label>
-                      <input type="date" class="form-control" placeholder="" id="inputDate">
+                      <input type="date" name="lecture_date" class="form-control" placeholder="" id="inputDate">
                     </div>
                     <div class="form-group">
                       <label class="col-form-label" for="inputTags">Kulcsszavak</label>
-                      <input type="text" class="form-control" placeholder="" id="inputTags">
+                      <input type="text" name="tags" class="form-control" placeholder="" id="inputTags">
                     </div>
                     <div class="form-group">
                       <label class="col-form-label" for="inputDescription">Leírás</label>
-                      <textarea class="form-control" id="inputDescription" rows="3"></textarea>
+                      <textarea name="description" class="form-control" id="inputDescription" rows="3"></textarea>
                     </div>
                     <div class="form-group">
-                      <label class="col-form-label" for="exampleInputFile">Fájlok feltöltése</label>
-                      <input required type="file" multiple accept= "image/*, .pdf, .doc, .docx, application/msword" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                      <label class="col-form-label" for="files">Fájlok feltöltése</label>
+                      <input required name="files" type="file" multiple accept= "image/*, .pdf, .doc, .docx, application/msword" class="form-control-file" id="files" aria-describedby="fileHelp">
                       <small id="fileHelp" class="form-text text-muted">Később is adhatsz hozzá fájlokat.</small>
                     </div>
                     <button type="submit" class="btn btn-primary">Létrehozás</button>
