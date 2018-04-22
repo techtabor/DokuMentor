@@ -9,7 +9,7 @@ const fs = require('fs');
 const app = express();
 
 //Külső config fájl betöltése
-const config = require('./config/config.js').get(process.env.NODE_ENV);
+const config = require('./config/config.js').get(process.env.NODE_ENV,true);
 
 app.set('view engine', 'ejs');
 app.use(fileUpload());
