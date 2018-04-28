@@ -16,6 +16,7 @@
           <p>Kurzus: <%=document.course%></p>
           <p>Leírás: <%=document.description%></p>
 
+          
           <% document.tags.split(', ').forEach(function(tag) { %>
             <span class="badge badge-pill badge-primary"><%=tag%></span>
           <% }); %>
