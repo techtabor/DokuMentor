@@ -12,18 +12,23 @@ const authCheck = (req, res, next) => {
 };
 
 router.get('/', (req, res) => {
-    res.render('v2/pages/home', { user: req.user });
+    res.render('pages/home', { user: req.user });
 });
 
 router.get('/newdocument', authCheck, (req, res) => {
-    res.render('v2/pages/newdocument', { user: req.user });
+    res.render('pages/newdocument', { user: req.user });
 });
 
 router.get('/documents', (req, res) => {
     models.Document.findAll().then( (result)=>{
-        console.log(result[0].dataValues);
-        //res.send(result);
-        res.render('v2/pages/documents', { user: req.user, documents: result});
+        res.render('pages/documents', { user: req.user, documents: result});
+    });
+});
+
+router.get('/document/:docid', (req, res) => {
+    models.File.findAll({where: {DocumentId: req.params.docid}}).then( (result)=>{
+        console.log(result);
+        res.render('pages/document', { user: req.user, documents: result});
     });
 });
 

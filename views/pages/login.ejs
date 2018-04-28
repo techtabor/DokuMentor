@@ -1,26 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <% include ../partials/head %>
-</head>
-<body class="container">
-
-<header>
-    <% include ../partials/header %>
-</header>
-
-<header>
-    <h2>Bejelentkezés a következővel</h2>
-</header>
-<main>
-    <a class="google-btn" href="/auth/google">Google+</a>
-</main>
-
-
-
-<footer>
-    <% include ../partials/footer %>
-</footer>
-
+<% include ../partials/head %>
+<body>
+    <% include ../partials/navbar %>
+    <div class="container" style="padding-top:6em">
+      <div class="bs-docs-section">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="page-header">
+                <h1 id="forms">Bejelentkezés</h1>
+                <header>
+                  <h2>Bejelentkezés a következővel</h2>
+                </header>
+                <main>
+                    <a class="google-btn" href="/auth/google">Google</a>
+                </main>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
 </body>
-</html>
