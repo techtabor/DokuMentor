@@ -26,9 +26,10 @@ router.get('/documents', (req, res) => {
 });
 
 router.get('/document/:docid', (req, res) => {
-    models.File.findAll({where: {DocumentId: req.params.docid}}).then( (result)=>{
-        console.log(result);
-        res.render('pages/document', { user: req.user, documents: result});
+    models.Document.findById(req.params.docid).then( (document) => {
+        models.File.findAll({where: {DocumentId: req.params.docid}}).then( (result)=>{
+            res.render('pages/document', { user: req.user, document: document, files: result});
+        });
     });
 });
 

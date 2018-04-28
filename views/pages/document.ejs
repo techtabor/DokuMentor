@@ -11,35 +11,28 @@
             </div>
           </div>
 
+          <p>Cím: <%=document.title%></p>
+          <p>Egyetem: <%=document.university%></p>
+          <p>Kurzus: <%=document.course%></p>
+          <p>Leírás: <%=document.description%></p>
+
+          <% document.tags.split(', ').forEach(function(tag) { %>
+            <span class="badge badge-pill badge-primary"><%=tag%></span>
+          <% }); %>
+          <p></p>
           <div class="row">
             <div class="col-lg-6">
                 <div class="list-group">
-                    <% documents.forEach(function(doc) { %>
-                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <% files.forEach(function(file) { %>
+                      <a href="" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
-                          <h5 class="mb-1"><%=doc.title%></h5>
-                          <small class="text-muted"><%=doc.lecture_date%></small>
+                          <h5 class="mb-1"><%=file.id%></h5>
+                          <small class="text-muted"><%=file.size%></small>
                         </div>
-                        <p class="mb-1"><%=doc.description%></p>
-                        <small class="text-muted"><%=doc.title+', '+doc.course%></small>
+                        <p class="mb-1"><%=file.size%></p>
+                        <small class="text-muted"><%=file.extension%></small>
                       </a>
                     <% }); %>
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                      <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small>3 days ago</small>
-                      </div>
-                      <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                      <small>Donec id elit non mi porta.</small>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                      <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small class="text-muted">3 days ago</small>
-                      </div>
-                      <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                      <small class="text-muted">Donec id elit non mi porta.</small>
-                    </a>
                   </div>
             </div>  
           </div>
