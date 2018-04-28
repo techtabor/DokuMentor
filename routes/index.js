@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router()
 
-router.use('/', require('./homepages'));
-router.use('/v2', require('./v2'));
+// router.use('/', require('./homepages'));
+router.use('/', require('./home'));
 router.use('/db', require('./db'));
 router.use('/auth', require('./auth'));
 router.use('/profile', require('./profile'));

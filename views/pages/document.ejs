@@ -1,0 +1,42 @@
+<% include ../partials/head %>
+<body>
+    <% include ../partials/navbar %>
+    <div class="container" style="padding-top:6em">
+      <div class="bs-docs-section">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="page-header">
+                <h1 id="forms">Főoldal</h1>
+              </div>
+            </div>
+          </div>
+
+          <p>Cím: <%=document.title%></p>
+          <p>Egyetem: <%=document.university%></p>
+          <p>Kurzus: <%=document.course%></p>
+          <p>Leírás: <%=document.description%></p>
+
+          <% document.tags.split(', ').forEach(function(tag) { %>
+            <span class="badge badge-pill badge-primary"><%=tag%></span>
+          <% }); %>
+          <p></p>
+          <div class="row">
+            <div class="col-lg-6">
+                <div class="list-group">
+                    <% files.forEach(function(file) { %>
+                      <a href="" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                          <h5 class="mb-1"><%=file.id%></h5>
+                          <small class="text-muted"><%=file.size%></small>
+                        </div>
+                        <p class="mb-1"><%=file.size%></p>
+                        <small class="text-muted"><%=file.extension%></small>
+                      </a>
+                    <% }); %>
+                  </div>
+            </div>  
+          </div>
+
+        </div>
+    </div>
+</body>

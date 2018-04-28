@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+
+<h3>Profil</h3>
+<p>Név: <%=user.name%></p>
+<p>Email: <%=user.email%></p>
+<p>Azonosító: <%=user.key%></p>
+<p>Csatlakozott: <%=user.add_date%></p>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+</body>
+</html>
