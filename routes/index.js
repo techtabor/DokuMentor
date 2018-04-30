@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router()
 
-// router.use('/', require('./homepages'));
 router.use('/', require('./home'));
-router.use('/db', require('./db'));
+router.use('/', require('./newdocument'));
 router.use('/auth', require('./auth'));
 router.use('/profile', require('./profile'));
+
+if(process.env.NODE_ENV == 'development') router.use('/dev', require('./dev'));
 
 router.use(function(req, res, next) {
   var err = new Error('Not Found');

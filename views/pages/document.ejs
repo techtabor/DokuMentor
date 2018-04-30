@@ -18,7 +18,7 @@
 
           
           <% document.tags.split(', ').forEach(function(tag) { %>
-            <span class="badge badge-pill badge-primary"><%=tag%></span>
+            <a href="/search?tags=<%=tag%>"><span class="badge badge-pill badge-primary"><%=tag%></span></a>
           <% }); %>
           <p></p>
           <div class="row">

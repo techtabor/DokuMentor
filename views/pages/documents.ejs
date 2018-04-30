@@ -1,54 +1,82 @@
 <% include ../partials/head %>
 <body>
-    <% include ../partials/navbar %>
-    <div class="container" style="padding-top:6em">
-      <div class="bs-docs-section">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="page-header">
-                <h1 id="forms"><%=title%></h1>
-              </div>
+  <% include ../partials/navbar %>
+  <div class="container" style="padding-top:6em">
+    <div class="bs-docs-section">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h1 id="forms"><%=title%></h1>
             </div>
           </div>
-          
-          <%if (/*title=='Keresés eredménye'*/ true){%>
-            <p>Összetett keresés beállításainak helye</p>
-          <%}%>
-
-          <p><%=all%> találat</p>
-          <p><%=page%>/<%=Math.ceil(all/limit)%>. oldal</p>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="list-group">
-                    <% documents.forEach(function(doc) { %>
-                      <a href="/document/<%=doc.id%>" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                          <h5 class="mb-1"><%=doc.title%></h5>
-                          <small class="text-muted"><%=doc.lecture_date%></small>
-                        </div>
-                        <small class="text-muted"><%=doc.university+', '+doc.course%></small>
-                        <p>
-                          <% doc.tags.split(', ').forEach(function(tag) { %>
-                            <span class="badge badge-pill badge-primary"><%=tag%></span>
-                          <% }); %>
-                        </p>
-                      </a>
-                    <% }); %>
-                    <!-- <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                      <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small>3 days ago</small>
-                      </div>
-                      <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                      <small>Donec id elit non mi porta.</small>
-                    </a>-->
-                  </div>
-            </div>  
-          </div>
-
-    <!-- Eleje -->
-    <!-- Vége -->
-
         </div>
+        
+        <!-- <a href="javascript:setParam('priceMin', 300);">add priceMin=300</a> -->
+
+        <%if (/*title=='Keresés eredménye'*/ true){%>
+          <p>Összetett keresés beállításainak helye</p>
+        <%}%>
+        <%var maxpage = Math.ceil(all/limit);%>
+        <p><%=all%> találat</p>
+        <p><%=page%>/<%=maxpage%>. oldal</p>
+        <%if (page > 1) {%> <a href="javascript:setParam('page', <%=page-1%>);">Előző oldal</a> <%}%>
+        <%if (page < maxpage) {%> <a href="javascript:setParam('page', <%=page+1%>);">Következő oldal</a> <%}%>
+        <p></p>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="list-group">
+              <% documents.forEach(function(doc) { %>
+                <a href="/document/<%=doc.id%>" class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><%=doc.title%></h5>
+                    <small class="text-muted"><%=doc.get('add_date')%></small>
+                  </div>
+                  <div>
+                    <small class="text-muted"><%=doc.Files.length%> fájl</small>
+                  </div>
+                  <small class="text-muted"><%=doc.university+', '+doc.course%></small>
+                  <p>
+                    <% doc.tags.split(', ').forEach(function(tag) { %>
+                      <span class="badge badge-pill badge-primary"><%=tag%></span>
+                      <% }); %>
+                  </p>
+                </a>
+                <% }); %>
+                  <!-- <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h5 class="mb-1">List group item heading</h5>
+                      <small>3 days ago</small>
+                    </div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                    <small>Donec id elit non mi porta.</small>
+                  </a>-->
+          </div>
+        </div>  
+      </div>
     </div>
+  </div>
 </body>
+<script>
+    function setParam(name, value) {
+        var l = window.location;
+        var params = {};        
+        var x = /(?:\??)([^=&?]+)=?([^&?]*)/g;        
+        var s = l.search;
+        for(var r = x.exec(s); r; r = x.exec(s))
+        {
+            r[1] = decodeURIComponent(r[1]);
+            if (!r[2]) r[2] = '%%';
+            params[r[1]] = r[2];
+        }
+        params[name] = encodeURIComponent(value);
+        var search = [];
+        for(var i in params)
+        {
+            var p = encodeURIComponent(i);
+            var v = params[i];
+            if (v != '%%') p += '=' + v;
+            search.push(p);
+        }
+        l.search = search.join('&');
+    }
+</script>

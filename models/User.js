@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes){
     });
 
     User.associate = function(models) {
-      models.User.hasMany(models.Document);
+      models.User.hasMany(models.Document, {as: 'Documents'});
     };
     
     return User;
