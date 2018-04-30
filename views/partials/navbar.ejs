@@ -19,8 +19,8 @@
           <a class="nav-link" href="/profile">Profil<% if (user) { %> (<%=user.name%>)<% } %></a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Keresés" aria-label="Search">
+      <form class="form-inline my-2 my-lg-0" action="/search" method="GET">
+        <input name="q" class="form-control mr-sm-2" type="search" placeholder="Keresés" aria-label="Search">
         <button class="btn btn-success my-2 my-sm-0" type="submit">Keresés</button>
       </form>
       <ul class="nav navbar-nav navbar-right">

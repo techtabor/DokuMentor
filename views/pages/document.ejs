@@ -6,16 +6,17 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="page-header">
-                <h1 id="forms">Főoldal</h1>
+                <h1 id="forms">Dokumentum adatai</h1>
               </div>
             </div>
           </div>
-
+          <%if (document !== null){%>
           <p>Cím: <%=document.title%></p>
           <p>Egyetem: <%=document.university%></p>
           <p>Kurzus: <%=document.course%></p>
           <p>Leírás: <%=document.description%></p>
 
+          
           <% document.tags.split(', ').forEach(function(tag) { %>
             <span class="badge badge-pill badge-primary"><%=tag%></span>
           <% }); %>
@@ -36,7 +37,7 @@
                   </div>
             </div>  
           </div>
-
+          <%}%>
         </div>
     </div>
 </body>
