@@ -5,6 +5,7 @@ router.use('/', require('./home'));
 router.use('/', require('./newdocument'));
 router.use('/auth', require('./auth'));
 router.use('/profile', require('./profile'));
+router.use('/', require('./advsearch'));
 
 if(process.env.NODE_ENV == 'development') router.use('/dev', require('./dev'));
 
