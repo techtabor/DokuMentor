@@ -1,0 +1,40 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'test' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.3
+4 verbose run-script [ 'pretest', 'test', 'posttest' ]
+5 info lifecycle dokumentor@0.0.0~pretest: dokumentor@0.0.0
+6 silly lifecycle dokumentor@0.0.0~pretest: no script for pretest, continuing
+7 info lifecycle dokumentor@0.0.0~test: dokumentor@0.0.0
+8 verbose lifecycle dokumentor@0.0.0~test: unsafe-perm in lifecycle true
+9 verbose lifecycle dokumentor@0.0.0~test: PATH: C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;C:\Users\Réka\DoMe\DokuMentor\node_modules\.bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\Adobe\AGL;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\Skype\Phone\;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin;C:\Android\sdk;C:\Program Files\Java\jdk1.8.0_101\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\Réka\AppData\Local\Microsoft\WindowsApps;C:\Users\Réka\AppData\Roaming\npm;;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Heroku\bin
+10 verbose lifecycle dokumentor@0.0.0~test: CWD: C:\Users\Réka\DoMe\DokuMentor
+11 silly lifecycle dokumentor@0.0.0~test: Args: [ '/d /s /c',
+11 silly lifecycle   'export NODE_ENV=development|| set NODE_ENV=development&& nodemon app' ]
+12 silly lifecycle dokumentor@0.0.0~test: Returned: code: 3221225786  signal: null
+13 info lifecycle dokumentor@0.0.0~test: Failed to exec test script
+14 error Test failed.  See above for more details.
+15 verbose exit [ 1, true ]
+16 verbose stack Error: kill ENOSYS
+16 verbose stack     at exports._errnoException (util.js:1020:11)
+16 verbose stack     at process.kill (internal/process.js:190:13)
+16 verbose stack     at process.listener (C:\Program Files\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:86:15)
+16 verbose stack     at emitNone (events.js:91:20)
+16 verbose stack     at process.emit (events.js:185:7)
+16 verbose stack     at processEmit (C:\Program Files\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+16 verbose stack     at processEmit (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-registry-client\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+16 verbose stack     at Signal.wrap.onsignal (internal/process.js:217:44)
+17 verbose cwd C:\Users\Réka\DoMe\DokuMentor
+18 error Windows_NT 10.0.16299
+19 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "test"
+20 error node v6.11.3
+21 error npm  v3.10.10
+22 error code ENOSYS
+23 error errno ENOSYS
+24 error syscall kill
+25 error kill ENOSYS
+26 error If you need help, you may report this error at:
+26 error     <https://github.com/npm/npm/issues>
+27 verbose exit [ 1, true ]
