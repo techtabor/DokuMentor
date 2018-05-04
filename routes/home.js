@@ -40,6 +40,10 @@ router.get('/documents', (req, res) => {
     });
 });
 
+router.get('/advsearch', (req, res) => {
+    res.render('pages/advsearch', { user: req.user });
+});
+
 router.get('/search', (req, res) => {
     var where = {};
     var prop = ['title','university','course','teacher','tags','description'];

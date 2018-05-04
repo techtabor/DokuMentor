@@ -10,12 +10,14 @@
             </div>
           </div>
         </div>
-        
+
         <!-- <a href="javascript:setParam('priceMin', 300);">add priceMin=300</a> -->
 
         <%if (/*title=='Keresés eredménye'*/ true){%>
           <p>Összetett keresés beállításainak helye</p>
+          <p><a href="/advsearch">Összetett keresés</a></p>
         <%}%>
+        <input type="text" placeholder="Keresés">
         <%var maxpage = Math.ceil(all/limit);%>
         <p><%=all%> találat</p>
         <p><%=page%>/<%=maxpage%>. oldal</p>
