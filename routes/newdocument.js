@@ -15,21 +15,25 @@ const authCheck = (req, res, next) => {
 };
 
 router.get('/newdocument', authCheck, (req, res) => {
-    res.render('pages/newdocument', { user: req.user });
+      models.Document.getUniversities(models, (unis) => {
+            res.render('pages/newdocument', { user: req.user, universities: unis});
+      });
 });
 
 router.post('/newdocument', authCheck , (req, res) => {
-    if (!req.files 
+    if ((!req.files 
           || !req.body 
           || !req.body.title 
           || !req.body.university
-          || !req.body.course ) return res.status(400).send('Hiányos adatok.');
+          || !req.body.course )
+          || (req.body.university === 'Egyéb' && !req.body.newUniversity)) return res.status(400).send('Hiányos adatok.');
           
     req.body.UserId = req.user.id;
 
     //TODO: if (!Number.isInteger(req.body.semester) || req.body.semester <= 0) req.body.semester = null;
     if (!moment(req.body.lecture_date).isValid()) req.body.lecture_date = null;
-    
+    if (req.body.university === 'Egyéb') req.body.university = req.body.newUniversity;
+
     models.Document.create(req.body).then(doc => {
           console.log('Új dokumentum id: ' + doc.id);
           
@@ -53,8 +57,9 @@ router.post('/newdocument', authCheck , (req, res) => {
                       });
                 });
           });
+          return res.redirect('/document/'+doc.id);
     });
-    res.end('OK');
+    //res.send('Hiba');
 });
 
 module.exports = router;

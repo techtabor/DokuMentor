@@ -8,44 +8,55 @@ module.exports = function(sequelize, DataTypes){
       type: 'TIMESTAMP',
       defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       allowNull: false,
-      get() {
-        /*console.log('korábban:',moment(this.getDataValue('add_date')).format());
-        console.log('most:',moment().format());*/
-        return moment(this.getDataValue('add_date')).fromNow();
-      }
     },
     title: {
-          type: Sequelize.STRING,
-          allowNull: false
-        },
-        university: {
-          type: Sequelize.STRING,
-          allowNull: false
-        },
-        course: {
-          type: Sequelize.STRING,
-          allowNull: false
-        },
-        semester: {
-          type: Sequelize.INTEGER,
-        },
-        teacher: {
-          type: Sequelize.STRING,
-        },
-        lecture_date: {
-          type: Sequelize.DATE,
-        },
-        tags: {
-          type: Sequelize.STRING,
-        },
-        description: {
-          type: Sequelize.STRING,
-        },
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    university: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    course: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    semester: {
+      type: Sequelize.INTEGER,
+    },
+    teacher: {
+      type: Sequelize.STRING,
+    },
+    lecture_date: {
+      type: Sequelize.DATE,
+    },
+    tags: {
+      type: Sequelize.STRING,
+    },
+    description: {
+      type: Sequelize.STRING,
+    },
+  });
+  
+  Document.prototype.getDateFromNow = function () {
+    return moment(this.add_date).fromNow();
+  };
+
+  Document.associate = function(models) {
+    models.Document.hasMany(models.File, {as: 'Files'});
+  };
+
+  Document.getUniversities = function(models, callback) {
+    models.Document.findAll({
+      attributes: ['university']
+    }).then(result => {
+      var unis = [];
+      result.forEach(elem => {
+            if (!unis.includes(elem.university)) unis.push(elem.university);
+      });
+      return callback(unis);
     });
-
-    Document.associate = function(models) {
-      models.Document.hasMany(models.File, {as: 'Files'});
-    };
-
-    return Document;
+  };  
+  
+  return Document;
 };

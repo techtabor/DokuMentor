@@ -23,6 +23,12 @@ router.get('/alluser', (req, res) => {
       });
 });
 
+router.get('/universities', (req, res)=>{
+      models.Document.getUniversities(models, (unis) => {
+            res.send(unis);
+      });
+});
+
 router.get('/user/:userid', (req, res) => {
       models.User.findById(req.params.userid).then((result) =>{
             res.send(result);

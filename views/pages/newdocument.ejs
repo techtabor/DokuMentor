@@ -33,7 +33,16 @@
                     </div>
                     <div class="form-group">
                       <label class="col-form-label" for="inputUniversity">Egyetem</label>
-                      <input required name="university" type="text" class="form-control" placeholder="" id="inputUniversity">
+                      <select onchange="changeFunc();" required name="university" type="text" class="form-control" placeholder="" id="inputUniversity">
+                        <%universities.forEach(elem=>{%>
+                        <option value="<%=elem%>"><%=elem%></option>
+                        <%});%>
+                        <option>Egyéb</option>
+                      </select>
+                    </div>
+                    <div style="display:none" id="newunidiv" class="form-group">
+                      <label class="col-form-label" for="inputNewUniversity">Egyetem</label>
+                      <input required name="newUniversity" type="text" class="form-control" placeholder="" id="inputNewUniversity">
                     </div>
                     <div class="form-group">
                       <label class="col-form-label" for="inputCourse">Szak</label>
@@ -71,7 +80,18 @@
             </div>
           </div>
         </div>
-  
-
     </div>
 </body>
+<script>
+function changeFunc() {
+    var uni1 = document.getElementById("inputUniversity");
+    var uni2 = document.getElementById("newunidiv");
+    var selectedValue = uni1.options[uni1.selectedIndex].value;
+    if (selectedValue === 'Egyéb') {
+      uni2.style.display = "block";
+    }
+    else{
+      uni2.style.display = "none";
+    }
+}
+</script>

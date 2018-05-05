@@ -26,7 +26,18 @@ router.get('/document/:docid', (req, res) => {
     });
 });
 
-const limit=2;
+router.get('/file/:fileid', (req, res) => {
+    models.File.findById(req.params.fileid).then(file => {
+        fs.exists('./files/'+file.id+'.'+file.extension, function(exists) {
+            if(exists) return res.download('./files/'+file.id+'.'+file.extension);
+            else res.send('A fájl nem található a szerveren.');
+            //console.log(file.id+'.'+file.extension,exists);
+        });
+    });
+    //res.send('A fájl nem található a szerveren.');
+});
+
+const limit=6;
 const Op = models.Sequelize.Op;
 
 router.get('/documents', (req, res) => {
@@ -35,7 +46,7 @@ router.get('/documents', (req, res) => {
     models.Document.count().then(all => {
         page=Math.min(Math.max(page,1),Math.ceil(all/limit));
         models.Document.findAll({order: [['add_date', 'DESC']], include: [{model: models.File, as: 'Files'}], offset: (page-1)*limit, limit: limit}).then(result=>{
-            res.render('pages/documents', { user: req.user, page: page, all: all, limit: limit, documents: result,  title: 'Keresés eredménye'});
+            res.render('pages/documents', { user: req.user, page: page, all: all, limit: limit, documents: result,  title: 'Dokumentumok'});
         });
     });
 });
