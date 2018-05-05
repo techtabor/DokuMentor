@@ -18,14 +18,14 @@
 
           
           <% document.tags.split(', ').forEach(function(tag) { %>
-            <span class="badge badge-pill badge-primary"><%=tag%></span>
+            <a href="/search?tags=<%=tag%>"><span class="badge badge-pill badge-primary"><%=tag%></span></a>
           <% }); %>
           <p></p>
           <div class="row">
             <div class="col-lg-6">
                 <div class="list-group">
                     <% files.forEach(function(file) { %>
-                      <a href="" class="list-group-item list-group-item-action flex-column align-items-start">
+                      <a href="/file/<%=file.id%>" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                           <h5 class="mb-1"><%=file.id%></h5>
                           <small class="text-muted"><%=file.size%></small>
@@ -37,6 +37,23 @@
                   </div>
             </div>  
           </div>
+
+          <div style='margin-top: 3em' class='row'><div class='col-lg-12'>
+          <div id="disqus_thread"></div>
+          <script>
+            var disqus_config = function () {
+            this.page.url = 'http://ec2-18-195-57-19.eu-central-1.compute.amazonaws.com:3000/document/<%=document.id%>';
+            this.page.title = '<%=document.title%>';
+            };
+            (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://dokumentor.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div></div>
           <%}%>
         </div>
     </div>

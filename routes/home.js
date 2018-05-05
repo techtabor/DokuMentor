@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var moment = require('moment');
+var path = require('path');
+var fs = require('fs');
 
 const models = require('../models/');
 
@@ -15,21 +18,43 @@ router.get('/', (req, res) => {
     res.render('pages/home', { user: req.user });
 });
 
-router.get('/newdocument', authCheck, (req, res) => {
-    res.render('pages/newdocument', { user: req.user });
-});
-
-const limit=15;
-router.get('/documents', (req, res) => {
-    models.Document.findAll({order: [['add_date', 'DESC']]}).then(result => {
-        var page=1;
-        if (typeof req.query.page !== 'undefined') page=req.query.page;
-        page=Math.min(page,Math.ceil(result.length/limit));
-        res.render('pages/documents', { user: req.user, page: page, all:result.length, limit: limit, documents: result.slice((page-1)*limit,(page-1)*limit+limit),  title: 'Dokumentumok'});
+router.get('/document/:docid', (req, res) => {
+    models.Document.findById(req.params.docid).then(document => {
+        models.File.findAll({where: {DocumentId: req.params.docid}}).then( (result) => {
+            res.render('pages/document', { user: req.user, document: document, files: result});
+        });
     });
 });
 
+router.get('/file/:fileid', (req, res) => {
+    models.File.findById(req.params.fileid).then(file => {
+        fs.exists('./files/'+file.id+'.'+file.extension, function(exists) {
+            if(exists) return res.download('./files/'+file.id+'.'+file.extension);
+            else res.send('A fájl nem található a szerveren.');
+            //console.log(file.id+'.'+file.extension,exists);
+        });
+    });
+    //res.send('A fájl nem található a szerveren.');
+});
+
+const limit=6;
 const Op = models.Sequelize.Op;
+
+router.get('/documents', (req, res) => {
+    var page=1;
+    if (typeof req.query.page !== 'undefined') page=req.query.page;
+    models.Document.count().then(all => {
+        page=Math.min(Math.max(page,1),Math.ceil(all/limit));
+        models.Document.findAll({order: [['add_date', 'DESC']], include: [{model: models.File, as: 'Files'}], offset: (page-1)*limit, limit: limit}).then(result=>{
+            res.render('pages/documents', { user: req.user, page: page, all: all, limit: limit, documents: result,  title: 'Dokumentumok'});
+        });
+    });
+});
+
+router.get('/advsearch', (req, res) => {
+    res.render('pages/advsearch', { user: req.user });
+});
+
 router.get('/search', (req, res) => {
     var where = {};
     var prop = ['title','university','course','teacher','tags','description'];
@@ -47,16 +72,10 @@ router.get('/search', (req, res) => {
             if (typeof req.query[p] !== 'undefined') where[Op.and].push({[p]: {[Op.like]: ('%'+req.query[p]+'%')}});
         });
     }
-    models.Document.findAll({where: where, order: [['add_date', 'DESC']]}).then(result => {
-        page=Math.min(page,Math.ceil(result.length/limit));
-        res.render('pages/documents', { user: req.user, page: page, all:result.length, limit: limit, documents: result.slice((page-1)*limit,(page-1)*limit+limit),  title: 'Keresés eredménye'});
-    });
-});
-
-router.get('/document/:docid', (req, res) => {
-    models.Document.findById(req.params.docid).then(document => {
-        models.File.findAll({where: {DocumentId: req.params.docid}}).then( (result) => {
-            res.render('pages/document', { user: req.user, document: document, files: result});
+    models.Document.count({where: where}).then(all => {
+        page=Math.min(Math.max(page,1),Math.ceil(all/limit));
+        models.Document.findAll({where: where, order: [['add_date', 'DESC']], include: [{model: models.File, as: 'Files'}], offset: (page-1)*limit, limit: limit}).then(result=>{
+            res.render('pages/documents', { user: req.user, page: page, all: all, limit: limit, documents: result,  title: 'Keresés eredménye'});
         });
     });
 });
