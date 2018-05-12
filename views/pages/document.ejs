@@ -16,7 +16,6 @@
           <p>Szak, félév: <%=document.course%>, <%=document.semester%></p>
           <p>Leírás: <%=document.description%></p>
 
-          
           <% document.tags.split(', ').forEach(function(tag) { %>
             <a href="/search?tags=<%=tag%>"><span class="badge badge-pill badge-primary"><%=tag%></span></a>
           <% }); %>
