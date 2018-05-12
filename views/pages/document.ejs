@@ -13,10 +13,9 @@
           <%if (document !== null){%>
           <p>Cím: <%=document.title%></p>
           <p>Egyetem: <%=document.university%></p>
-          <p>Kurzus: <%=document.course%></p>
+          <p>Szak, félév: <%=document.course%>, <%=document.semester%></p>
           <p>Leírás: <%=document.description%></p>
 
-          
           <% document.tags.split(', ').forEach(function(tag) { %>
             <a href="/search?tags=<%=tag%>"><span class="badge badge-pill badge-primary"><%=tag%></span></a>
           <% }); %>
@@ -34,8 +33,16 @@
                         <small class="text-muted"><%=file.extension%></small>
                       </a>
                     <% }); %>
-                  </div>
-            </div>  
+                </div>
+
+                <!-- Preview a fájlokhoz-->
+                <div class="list-group">
+                    <% files.forEach(function(file) { %>
+                      <embed src="/file/<%=file.id%>" width="595px" height="842px" class="list-group-item list-group-item-action flex-column align-items-start" />
+                    <% }); %>
+                </div>
+
+            </div>
           </div>
 
           <div style='margin-top: 3em' class='row'><div class='col-lg-12'>
