@@ -1,3 +1,21 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<% include ../partials/head %>
+<body>
+    <div class="container" style="padding-top:6em">
+      <div class="bs-docs-section">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="page-header">
+                <h1 id="forms">Hiba</h1>
+                <%if(error.status==404) { %>
+                <h2>Sajnos ilyen oldal nem létezik.</h2>
+                <% } %>
+              </div>
+              <div>
+                    <h6><%= error.status %> <%= message %></h6>
+                    <pre><%= error.stack %></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</body>
