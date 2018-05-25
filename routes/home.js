@@ -27,14 +27,17 @@ router.get('/document/:docid', (req, res) => {
 });
 
 router.get('/file/:fileid', (req, res) => {
+    var download = true;
+    if (typeof req.query.d !== 'undefined') download=false;
     models.File.findById(req.params.fileid).then(file => {
         fs.exists('./files/'+file.id+'.'+file.extension, function(exists) {
-            if(exists) return res.download('./files/'+file.id+'.'+file.extension);
+            if(exists){
+                if (download) return res.download('./files/'+file.id+'.'+file.extension);
+                else return res.sendFile(path.resolve(__dirname,'../files/'+file.id+'.'+file.extension));
+            }
             else res.send('A fájl nem található a szerveren.');
-            //console.log(file.id+'.'+file.extension,exists);
         });
     });
-    //res.send('A fájl nem található a szerveren.');
 });
 
 const limit=6;
