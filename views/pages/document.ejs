@@ -24,7 +24,7 @@
             <div class="col-lg-6">
                 <div class="list-group">
                     <% files.forEach(function(file) { %>
-                      <a href="/file/<%=file.id%>" class="list-group-item list-group-item-action flex-column align-items-start">
+                      <a href="/file/<%=file.id%>?d=false" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                           <h5 class="mb-1"><%=file.id%></h5>
                           <small class="text-muted"><%=file.size%></small>
@@ -37,12 +37,16 @@
 
                 <!-- Preview a fájlokhoz-->
                 <br>
-                <div class="list-group">
+                <!-- <div class="list-group"> -->
                   <% files.forEach(function(file) { %>
-                    <embed src="/file/<%=file.id%>?d" width="595px" height="842px" class="list-group-item list-group-item-action flex-column align-items-start" />
+                    <% if (['doc','docx'].includes(file.extension)) {%>
+                    <iframe width="595px" height="842px" src="http://docs.google.com/gview?url=http://ec2-18-195-57-19.eu-central-1.compute.amazonaws.com:3000/file/<%=file.id%>&embedded=true"></iframe>
+                    <%} else {%>
+                    <iframe src="/file/<%=file.id%>?d" width="595px" height="842px"></iframe>
+                    <% } %>
                     <br>
                   <% }); %>
-                </div>
+                <!-- </div> -->
 
             </div>
           </div>

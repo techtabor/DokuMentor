@@ -27,8 +27,8 @@ router.get('/document/:docid', (req, res) => {
 });
 
 router.get('/file/:fileid', (req, res) => {
-    var download = true;
-    if (typeof req.query.d !== 'undefined') download=false;
+    var download = false;
+    if (typeof req.query.d !== 'undefined') download=true;
     models.File.findById(req.params.fileid).then(file => {
         fs.exists('./files/'+file.id+'.'+file.extension, function(exists) {
             if(exists){
