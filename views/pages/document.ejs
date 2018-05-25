@@ -42,7 +42,7 @@
                     <% if (['doc','docx'].includes(file.extension)) {%>
                     <iframe width="595px" height="842px" src="http://docs.google.com/gview?url=http://ec2-18-195-57-19.eu-central-1.compute.amazonaws.com:3000/file/<%=file.id%>&embedded=true"></iframe>
                     <%} else {%>
-                    <iframe src="/file/<%=file.id%>?d" width="595px" height="842px"></iframe>
+                    <iframe src="/file/<%=file.id%>" width="595px" height="842px"></iframe>
                     <% } %>
                     <br>
                   <% }); %>
