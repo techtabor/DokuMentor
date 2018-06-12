@@ -51,13 +51,28 @@ router.get('/rate/:docid', authCheck, (req, res) => {
 });
 
 router.get("/rating_info/:docid", authCheck, (req, res) => {
-    models.Document.findById(req.params.docid).then(document => {
-        models.Rating.findAll({where: {DocumentId: document.id}}).then( (result) => {
-            console.log(result);
-            res.send(String(result));
-        });
-    });
+    res.send(String(rating_info(req.params.docid)));
 });
+
+function rating_info(docid){
+    var sum = 0, length = 0;
+    models.Rating.findAll({where: {DocumentId: docid}}).then( (result) => {
+        length = result.length;
+        for(var i=0; i<result.length; i++){
+            //console.log("******");
+            sum += result[i].dataValues.value;
+            //console.log(sum);
+            //console.log(result[i].dataValues.value);
+            //console.log(typeof result[i].dataValues.value);
+        }
+        return [sum, length];
+    });
+    models.sync();
+    console.log("--->");
+    console.log([sum, length]);
+    
+    return [sum, length]
+}
 
 
 
