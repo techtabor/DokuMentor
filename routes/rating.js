@@ -51,27 +51,30 @@ router.get('/rate/:docid', authCheck, (req, res) => {
 });
 
 router.get("/rating_info/:docid", authCheck, (req, res) => {
-    res.send(String(rating_info(req.params.docid)));
+    rating_info(req.params.docid, (data) => {
+        res.end(String(data));
+    });
+    
+    //res.send(String(rating_info(req.params.docid)));
 });
 
-function rating_info(docid){
+function rating_info(docid, callback){
     var sum = 0, length = 0;
     models.Rating.findAll({where: {DocumentId: docid}}).then( (result) => {
         length = result.length;
         for(var i=0; i<result.length; i++){
             //console.log("******");
             sum += result[i].dataValues.value;
-            //console.log(sum);
             //console.log(result[i].dataValues.value);
             //console.log(typeof result[i].dataValues.value);
         }
-        return [sum, length];
+        console.log(sum);
+        callback([sum, length]);
     });
-    models.sync();
-    console.log("--->");
-    console.log([sum, length]);
+    //console.log("--->");
+    //console.log([sum, length]);
     
-    return [sum, length]
+    //return [sum, length]
 }
 
 
