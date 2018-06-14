@@ -12,7 +12,10 @@ const app = express();
 const config = require('./config/config.js').get(process.env.NODE_ENV,true);
 
 app.set('view engine', 'ejs');
-app.use(fileUpload());
+app.use(fileUpload({
+    limits: { fileSize: 25 * 1024 * 1024 },
+    abortOnLimit: true,
+  }));
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000,
   keys: [config.session.cookieKey]

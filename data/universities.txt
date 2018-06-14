@@ -1,0 +1,65 @@
+ANNYE - Andrássy Gyula Budapesti Német Nyelvű Egyetem
+MKE - Magyar Képzőművészeti Egyetem
+ATE - Állatorvostudományi Egyetem
+MOME - Moholy-Nagy Művészeti Egyetem
+ATF - Adventista Teológiai Főiskola
+MTE - Magyar Táncművészeti Egyetem
+AVKF - Apor Vilmos Katolikus Főiskola
+NJE - Neumann János Egyetem
+BCE - Budapesti Corvinus Egyetem
+NKE - Nemzeti Közszolgálati Egyetem
+BGE - Budapesti Gazdasági Egyetem
+NYE - Nyíregyházi Egyetem
+BHF - Bhaktivedanta Hittudományi Főiskola
+OE - Óbudai Egyetem
+BKTF - Budapest Kortárstánc Főiskola
+OR-ZSE - Országos Rabbiképző
+Országos Rabbiképző - Zsidó Egyetem title=BME
+BME - Budapesti Műszaki és Gazdaságtudományi Egyetem
+PE - Pannon Egyetem
+BTA - Baptista Teológiai Akadémia
+PHF - Pécsi Püspöki Hittudományi Főiskola
+DE - Debreceni Egyetem
+PPKE - Pázmány Péter Katolikus Egyetem
+DRHE - Debreceni Református Hittudományi Egyetem
+PRTA - Pápai Református Teológiai Akadémia
+DUE - Dunaújvárosi Egyetem
+PTE - Pécsi Tudományegyetem
+EDUTUS - Edutus Főiskola
+PTF - Pünkösdi Teológiai Főiskola
+EGHF - Egri Hittudományi Főiskola
+SE - Semmelweis Egyetem
+EHE - Evangélikus Hittudományi Egyetem
+SOE - Soproni Egyetem
+EJF - Eötvös József Főiskola
+SRTA - Sárospataki Református Teológiai Akadémia
+EKE - Eszterházy Károly Egyetem
+SSTF - Sola Scriptura Teológiai Főiskola
+ELTE - Eötvös Loránd Tudományegyetem
+SSZHF - Sapientia Szerzetesi Hittudományi Főiskola
+ESZHF - Esztergomi Hittudományi Főiskola
+SZAGKHF - Szent Atanáz Görög Katolikus Hittudományi Főiskola
+GDF - Gábor Dénes Főiskola
+SZE - Széchenyi István Egyetem
+GFF - Gál Ferenc Főiskola
+SZFE - Színház- és Filmművészeti Egyetem
+GTF - Golgota Teológiai Főiskola
+SZIE - Szent István Egyetem
+GYHF - Győri Hittudományi Főiskola
+SZPA - Szent Pál Akadémia
+IBS - IBS Nemzetközi Üzleti Főiskola
+SZTE - Szegedi Tudományegyetem
+KE - Kaposvári Egyetem
+TE - Testnevelési Egyetem
+KEE - Közép-európai Egyetem
+TKBF - A Tan Kapuja Buddhista Főiskola
+KJF - Kodolányi János Főiskola
+TPF - Tomori Pál Főiskola
+KRE - Károli Gáspár Református Egyetem
+VHF - Veszprémi Érseki Hittudományi Főiskola
+LFZE - Liszt Ferenc Zeneművészeti Egyetem
+WJLF - Wesley János Lelkészképző Főiskola
+ME - Miskolci Egyetem
+WSUF - Wekerle Sándor Üzleti Főiskola
+METU - Budapesti Metropolitan Egyetem
+ZSKE - Zsigmond Király Egyetem

@@ -15,10 +15,20 @@ const authCheck = (req, res, next) => {
 };
 
 router.get('/newdocument', authCheck, (req, res) => {
-      models.Document.getUniversities(models, (unis) => {
-            res.render('pages/newdocument', { user: req.user, universities: unis});
-      });
+      loadnewdocpage(req, res);
 });
+
+function loadnewdocpage(req, res, flash = false){
+      models.Document.getUniversities(models, (unis) => {
+            models.Document.findOne({where: {UserId: req.user.id}, order: [['add_date', 'DESC']]}).then((doc)=>{
+                  if (doc === null) doc = {};
+                  res.locals.flashwarning = flash;
+                  models.Document.getUniversities(models, (unis) => {
+                        res.render('pages/newdocument', { user: req.user, universities: unis, prevdoc: doc});
+                  });
+            });
+      });
+}
 
 router.post('/newdocument', authCheck , (req, res) => {
     if ((!req.files 
@@ -57,7 +67,16 @@ router.post('/newdocument', authCheck , (req, res) => {
                       });
                 });
           });
-          return res.redirect('/document/'+doc.id);
+          res.redirect('/document/'+doc.id);
+    }).catch((error) => {
+      console.log(error.errors[0].message);
+      message = '';
+      error.errors.forEach(err => {
+            message += err + " "
+      });
+      loadnewdocpage(req, res, {
+            message: message
+      });
     });
     //res.send('Hiba');
 });

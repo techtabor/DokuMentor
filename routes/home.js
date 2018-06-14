@@ -15,7 +15,16 @@ const authCheck = (req, res, next) => {
 };
 
 router.get('/', (req, res) => {
-    res.render('pages/home', { user: req.user });
+    res.redirect('/documents');
+    //res.render('pages/home', { user: req.user });
+});
+
+router.get('/howto', (req, res) => {
+    res.render('pages/howto', { user: req.user });
+});
+
+router.get('/about', (req, res) => {
+    res.render('pages/about', { user: req.user });
 });
 
 router.get('/document/:docid', (req, res) => {

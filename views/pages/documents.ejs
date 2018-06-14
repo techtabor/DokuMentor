@@ -27,8 +27,8 @@
           <div class="col-lg-6">
             <h1><%=title%></h1>
             <%if (/*title=='Keresés eredménye'*/ true){%>
-              <p>Összetett keresés beállításainak helye</p>
-              <p><a href="/advsearch">Összetett keresés</a></p>
+              <!-- <p>Összetett keresés beállításainak helye</p> -->
+              <p><a href="#advancedsearch">Összetett keresés</a></p>
             <%}%>
             <input type="text" placeholder="Keresés">
             <%var maxpage = Math.ceil(all/limit);%>
@@ -64,8 +64,9 @@
                   <small>Donec id elit non mi porta.</small>
                 </a> -->
           </div>
+          <br>
         </div> 
-         <div class="col-lg-6">
+         <div id="advancedsearch" class="col-lg-6">
            <h1>Összetett keresés</h1>
           <div class="form-group">
               <label class="col-form-label" for="inputCourse">Szak</label>
