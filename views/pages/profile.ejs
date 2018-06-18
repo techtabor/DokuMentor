@@ -11,8 +11,8 @@
               <p>Teljes név: <%=user.name%></p>
               <!-- <p>Nicknév: ..... <i>Ez a név jelenik meg a feltöltött dokumentumoknál, hozzászólásoknál és értékeléseknél.</i> </p>  -->
               <p>Email: <%=user.email%></p>
-              <p>Azonosító: <%=user.key%></p>
-              <p>Csatlakozott: <%=user.add_date%></p>
+              <!-- <p>Azonosító: <%=user.key%></p> -->
+              <p>Csatlakozott: <%=user.getDateFromNow()%></p>
               <br>
               <h4>Saját dokumentumok (<%= documents.length%> db):</h4>
               <div style="overflow: scroll; height:400px;"><table class="table table-hover">

@@ -1,4 +1,6 @@
 const Sequelize = require('sequelize');
+var moment = require('moment');
+moment.locale('hu');
 
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
@@ -20,6 +22,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   });
+
+  User.prototype.getDateFromNow = function () {
+    return moment(this.add_date).fromNow();
+  };
 
   User.associate = function(models) {
     models.User.hasMany(models.Document, {as: 'Documents'});
