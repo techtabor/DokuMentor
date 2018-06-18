@@ -6,14 +6,23 @@
 
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item"><!-- <li class="nav-item active"> -->
-          <a class="nav-link" href="/">Főoldal <!--<span class="sr-only">(current)</span>--></a>
-        </li>
+        <!--<li class="nav-item"><!-- <li class="nav-item active"> -->
+          <!--<a class="nav-link" href="/">Főoldal <!--<span class="sr-only">(current)</span></a>-->
+        <!--</li>-->
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/">Főoldal</a>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="/documents">Dokumentumok</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/newdocument">Új dokumentum</a>
+          <a class="nav-link" href="/howto">Működés</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/newdocument">Feltöltés</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">Rólunk</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/profile">Profil<% if (user) { %> (<%=user.name%>)<% } %></a>
@@ -33,3 +42,10 @@
       </ul>  
     </div>
 </nav>
+<% if (flashwarning) {%>
+<div style="padding-top: 5em; border: 0;" class="alert alert-dismissible alert-warning">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4 class="alert-heading">Valami nem oké...</h4>
+  <p class="mb-0"><%=flashwarning.message%> A használati útmutató elérhető <a href="/howto" class="alert-link">ezen a linken</a>.</p>
+</div>
+<% } %>

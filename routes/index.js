@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router()
 
+router.use((req, res, next) => {
+  res.locals.flashwarning = false;
+  next();
+});
+
 router.use('/', require('./home'));
 router.use('/', require('./newdocument'));
 router.use('/auth', require('./auth'));

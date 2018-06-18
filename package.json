@@ -14,6 +14,7 @@
     "ejs": "~2.5.7",
     "express": "~4.15.5",
     "express-fileupload": "^0.4.0",
+    "express-zip": "^2.0.1",
     "moment": "^2.22.1",
     "morgan": "~1.9.0",
     "mysql": "^2.15.0",

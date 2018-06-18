@@ -26,11 +26,12 @@
         <div class="row">
           <div class="col-lg-6">
             <h1><%=title%></h1>
-            <%if (/*title=='Keresés eredménye'*/ true){%>
-              <p>Összetett keresés beállításainak helye</p>
-              <p><a href="/advsearch">Összetett keresés</a></p>
-            <%}%>
-            <input type="text" placeholder="Keresés">
+            <%//if (/*title=='Keresés eredménye'*/ true){%>
+              <!-- <p>Összetett keresés beállításainak helye</p> -->
+              <!-- <p><a href="#advancedsearch">Összetett keresés</a></p> -->
+            <%//}%>
+            <!-- <input type="text" placeholder="Keresés"> -->
+            
             <%var maxpage = Math.ceil(all/limit);%>
             <p><%=all%> találat</p>
             <p><%=page%>/<%=maxpage%>. oldal</p>
@@ -64,28 +65,40 @@
                   <small>Donec id elit non mi porta.</small>
                 </a> -->
           </div>
+          <br>
         </div> 
-         <div class="col-lg-6">
-           <h1>Összetett keresés</h1>
-          <div class="form-group">
-              <label class="col-form-label" for="inputCourse">Szak</label>
-              <input required name="course" type="text" class="form-control" placeholder="" id="inputCourse">
-            </div>
-            <div class="form-group">
-              <label class="col-form-label" for="inputSemester">Félév</label>
-              <input type="number" name="semester" class="form-control" placeholder="" id="inputSemester">
-            </div>
-            <div class="form-group">
-              <label class="col-form-label" for="inputTeacher">Tanár</label>
-              <input type="text" name="teacher" class="form-control" placeholder="" id="inputTeacher">
-            </div>
-            <div class="form-group">
-              <label class="col-form-label" for="inputDate">Dátum</label>
-              <input type="date" name="lecture_date" class="form-control" placeholder="" id="inputDate">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Keresés">
+         <div id="advancedsearch" class="col-lg-6">
+          <h1>Összetett keresés</h1>
+          <form lpformnum="1" action="/search" method="GET" encType="multipart/form-data">
+            <fieldset>
+              <div class="form-group">
+                <label class="col-form-label" for="inputTitle">Cím</label>
+                <input value="<%=query.title%>" name="title" type="text" class="form-control" placeholder="" id="inputTitle">
               </div>
+              <div class="form-group">
+                <label class="col-form-label" for="inputUniversity">Egyetem</label>
+                <input value="<%=query.university%>" name="university" type="text" class="form-control" placeholder="" id="inputUniversity">
+              </div>
+              <div class="form-group">
+                <label class="col-form-label" for="inputCourse">Szak</label>
+                <input value="<%=query.course%>" name="course" type="text" class="form-control" placeholder="" id="inputCourse">
+              </div>
+              <div class="form-group">
+                <label class="col-form-label" for="inputSemester">Félév</label>
+                <input value="<%=query.semester%>" min="1" step="1" type="number" name="semester" class="form-control" placeholder="" id="inputSemester">
+              </div>
+              <div class="form-group">
+                <label class="col-form-label" for="inputTeacher">Tanár</label>
+                <input value="<%=query.teacher%>" type="text" name="teacher" class="form-control" placeholder="" id="inputTeacher">
+              </div>
+              <!-- <div class="form-group">
+                <label class="col-form-label" for="inputTags">Kulcsszavak</label>
+                <input value="<%=query.tags%>" type="text" name="tags" class="form-control" placeholder="" id="inputTags">
+                <small class="form-text text-muted" >A kulcsszavakat vesszővel és szóközzel válaszd el egymástól! (Például: biológia, etológia, taxis)</small>
+              </div> -->
+              <button type="submit" class="btn btn-primary">Keresés</button>
+            </fieldset>
+          </form>
           </div>
       </div>
     </div>

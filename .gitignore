@@ -1,8 +1,5 @@
 /node_modules
-/uploads
-dokumentor.code-workspace
 package-lock.json
 config/config.js
 config/awsconfig.js
 files/
-public/
