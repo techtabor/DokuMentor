@@ -35,7 +35,7 @@ router.get('/rate/:docid/:value', authCheck, (req, res) => {
         }}).then(obj => {
             
             if(obj){
-                console.log("ide");
+                //console.log("ide");
                 obj.update(data);
                 //console.log(obj);
                 //console.log("hehe");
@@ -65,7 +65,7 @@ function rating_info(docid, callback){
         for(var i=0; i<result.length; i++){
             sum += result[i].dataValues.value;
         }
-        console.log(sum);
+        //console.log(sum);
         callback([sum, length]);
     });
 }

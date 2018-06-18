@@ -20,7 +20,7 @@ function rating_info(req, docid, callback){
                 mine = akt.value;
             }
         }
-        console.log(sum);
+        //console.log(sum);
         var avg = "Még nincs értékelés.";
         if(length > 0) avg = sum/length
         callback({
