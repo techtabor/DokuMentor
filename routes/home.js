@@ -68,7 +68,7 @@ router.get('/file/:fileid', (req, res) => {
             if(exists){
                 if (download) res.download('./files/'+file.id+'.'+file.extension,file.originalname);
                 else {
-                    if (['jpg'].includes(file.extension) && !direct) {
+                    if (['jpg','png'].includes(file.extension) && !direct) {
                         res.render('partials/img', { id: file.id });
                     }
                     else res.sendFile(path.resolve(__dirname,'../files/'+file.id+'.'+file.extension));
