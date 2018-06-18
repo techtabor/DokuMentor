@@ -8,7 +8,7 @@ const models = require('../models/');
 
 const authCheck = (req, res, next) => {
     if(!req.isAuthenticated()){
-        res.redirect('../auth/login');
+        res.redirect('../auth/login?redirect='+req.originalUrl);
     } else {
         next();
     }
