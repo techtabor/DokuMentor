@@ -59,7 +59,10 @@ router.get('/document/:docid', (req, res) => {
     models.Document.findById(req.params.docid).then(document => {
         if (document != null) models.User.findById(document.UserId).then(uploader => {
             models.File.findAll({where: {DocumentId: req.params.docid}}).then( (result) => {
-                res.render('pages/document', { user: req.user, document: document, files: result, uploader: uploader});
+                
+                rating_info(req, req.params.docid, (ratings) => {
+                    res.render('pages/document', { user: req.user, document: document, files: result, uploader: uploader, ratings: ratings});
+                });
             });
         });
         else res.render('pages/error', {error: {status: 404}, message: 'Nincs ilyen azonosítójú dokumentum.'});
