@@ -29,8 +29,28 @@ router.get('/about', (req, res) => {
 
 router.get('/document/:docid', (req, res) => {
     models.Document.findById(req.params.docid).then(document => {
+        models.User.findById(document.UserId).then(uploader => {
+            models.File.findAll({where: {DocumentId: req.params.docid}}).then( (result) => {
+                res.render('pages/document', { user: req.user, document: document, files: result, uploader: uploader});
+            });
+        });
+    });
+});
+
+const zip = require('express-zip');
+router.get('/zip/:docid', (req, res) => {
+    models.Document.findById(req.params.docid).then(document => {
         models.File.findAll({where: {DocumentId: req.params.docid}}).then( (result) => {
-            res.render('pages/document', { user: req.user, document: document, files: result});
+            var files = [];
+            for(var i=0; i<result.length; i++){
+                var file = result[i];
+                var name = document.title;
+                if (result.length > 1) name += ' ' + (i+1);
+                name += '.'+ file.extension;
+                files.push({path: path.resolve(__dirname,'../files/',file.id+'.'+file.extension), name:name});
+            }
+            res.zip(files, document.title+'.zip');
+            //res.render('pages/document', { user: req.user, document: document, files: result});
         });
     });
 });
@@ -41,11 +61,11 @@ router.get('/file/:fileid', (req, res) => {
     models.File.findById(req.params.fileid).then(file => {
         if (file != null) fs.exists('./files/'+file.id+'.'+file.extension, function(exists) {
             if(exists){
-                if (download) return res.download('./files/'+file.id+'.'+file.extension);
-                else return res.sendFile(path.resolve(__dirname,'../files/'+file.id+'.'+file.extension));
+                if (download) res.download('./files/'+file.id+'.'+file.extension);
+                else res.sendFile(path.resolve(__dirname,'../files/'+file.id+'.'+file.extension));
             }
         });
-        return res.send('A fájl nem található a szerveren.');
+        else res.send('A fájl nem található a szerveren.');
     });
 });
 
@@ -58,7 +78,7 @@ router.get('/documents', (req, res) => {
     models.Document.count().then(all => {
         page=Math.min(Math.max(page,1),Math.ceil(all/limit));
         models.Document.findAll({order: [['add_date', 'DESC']], include: [{model: models.File, as: 'Files'}], offset: (page-1)*limit, limit: limit}).then(result=>{
-            res.render('pages/documents', { user: req.user, page: page, all: all, limit: limit, documents: result,  title: 'Dokumentumok'});
+            res.render('pages/documents', { user: req.user, query: req.query, page: page, all: all, limit: limit, documents: result,  title: 'Dokumentumok'});
         });
     });
 });
@@ -86,9 +106,10 @@ router.get('/search', (req, res) => {
     }
     models.Document.count({where: where}).then(all => {
         page=Math.min(Math.max(page,1),Math.ceil(all/limit));
-        models.Document.findAll({where: where, order: [['add_date', 'DESC']], include: [{model: models.File, as: 'Files'}], offset: (page-1)*limit, limit: limit}).then(result=>{
-            res.render('pages/documents', { user: req.user, page: page, all: all, limit: limit, documents: result,  title: 'Keresés eredménye'});
+        if (all>0) models.Document.findAll({where: where, order: [['add_date', 'DESC']], include: [{model: models.File, as: 'Files'}], offset: (page-1)*limit, limit: limit}).then(result=>{
+            res.render('pages/documents', { user: req.user, query: req.query, page: page, all: all, limit: limit, documents: result,  title: 'Keresés eredménye'});
         });
+        else res.render('pages/documents', { user: req.user, query: req.query, page: page, all: all, limit: limit, documents: [],  title: 'Keresés eredménye'});
     });
 });
 
