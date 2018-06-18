@@ -29,11 +29,12 @@ router.get('/about', (req, res) => {
 
 router.get('/document/:docid', (req, res) => {
     models.Document.findById(req.params.docid).then(document => {
-        models.User.findById(document.UserId).then(uploader => {
+        if (document != null) models.User.findById(document.UserId).then(uploader => {
             models.File.findAll({where: {DocumentId: req.params.docid}}).then( (result) => {
                 res.render('pages/document', { user: req.user, document: document, files: result, uploader: uploader});
             });
         });
+        else res.render('pages/error', {error: {status: 404}, message: 'Nincs ilyen azonosítójú dokumentum.'});
     });
 });
 
@@ -44,9 +45,10 @@ router.get('/zip/:docid', (req, res) => {
             var files = [];
             for(var i=0; i<result.length; i++){
                 var file = result[i];
-                var name = document.title;
-                if (result.length > 1) name += ' ' + (i+1);
-                name += '.'+ file.extension;
+                var name = file.originalname;
+                //var name = document.title;
+                //if (result.length > 1) name += ' ' + (i+1);
+                //name += ' ('+file.originalname+').'+ file.extension;
                 files.push({path: path.resolve(__dirname,'../files/',file.id+'.'+file.extension), name:name});
             }
             res.zip(files, document.title+'.zip');
@@ -61,8 +63,13 @@ router.get('/file/:fileid', (req, res) => {
     models.File.findById(req.params.fileid).then(file => {
         if (file != null) fs.exists('./files/'+file.id+'.'+file.extension, function(exists) {
             if(exists){
-                if (download) res.download('./files/'+file.id+'.'+file.extension);
-                else res.sendFile(path.resolve(__dirname,'../files/'+file.id+'.'+file.extension));
+                if (download) res.download('./files/'+file.id+'.'+file.extension,file.originalname);
+                else {
+                    if (['jpg'].includes(file.extension)) {
+                        res.render('partials/img', { id: file.id });
+                    }
+                    else res.sendFile(path.resolve(__dirname,'../files/'+file.id+'.'+file.extension));
+                }
             }
             else res.send('A fájl nem található a szerveren.');
         });

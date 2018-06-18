@@ -7,7 +7,7 @@ var env       = process.env.NODE_ENV || 'development';
 var db        = {};
 
 var config = require('../config/config.js').get(process.env.NODE_ENV);
-
+var timezone = (env == 'production') ? '+00:00' : '+02:00';
 var sequelize = new Sequelize(config.databaseconnection.database,
     config.databaseconnection.user,
     config.databaseconnection.password, {
@@ -24,7 +24,7 @@ var sequelize = new Sequelize(config.databaseconnection.database,
     dialectOptions: {
       useUTC: false
     },
-    timezone: '+00:00',
+    timezone: timezone,
     logging: false,
     operatorsAliases: false
   });

@@ -54,7 +54,7 @@ router.post('/newdocument', authCheck , (req, res) => {
           files.forEach((uploadedFile,i) => {        
                 var ext = path.extname(uploadedFile.name||'').split('.');
                 ext = ext[ext.length - 1];
-                models.File.create({extension: ext,
+                models.File.create({extension: ext,originalname: uploadedFile.name,
                             DocumentId: doc.id}).then(file => {
                       if (!fs.existsSync('./files')) fs.mkdirSync('./files');
                       uploadedFile.mv('./files/'+file.id+'.'+file.extension, function(err) {

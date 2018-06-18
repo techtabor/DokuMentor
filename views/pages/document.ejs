@@ -2,57 +2,73 @@
 <body>
     <% include ../partials/navbar %>
     <div class="container" style="padding-top:6em">
-      <div class="bs-docs-section">
-        <%if (document !== null){%>
-        <div class="row">
-            <div class="col-lg-12">
-              <div class="page-header">
-                <h1 id="forms"><%=document.title%></h1>
-              </div>
-            </div>
-          </div>
-          <p><strong>Cím:</strong> <%=document.title%></p>
-          <p><strong>Egyetem:</strong> <%=document.university%></p>
-          <p><strong>Szak, félév:</strong> <%=document.course%>, <%=document.semester%></p>
-          <p><strong>Tanár:</strong> <%=document.teacher%></p>
-          <p><strong>Leírás:</strong> <%=document.description%></p>
-          <p><strong>Feltöltő:</strong> <%=uploader.name%></p>
-          
-          <p><% document.tags.split(', ').forEach(function(tag) { %>
-            <a href="/search?tags=<%=tag%>"><span class="badge badge-pill badge-primary"><%=tag%></span></a>
-          <% }); %></p>
-          <h3>Fájlok:</h3>
-          <%if (files.length>0){%><a href="/zip/<%=document.id%>"><button type="button" class="btn btn-secondary">Letöltés tömörítve. (zip)</button></a><%}%>
-          
-          <%function bytesToSize(bytes) {
-            var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-            if (bytes == 0) return 'n/a';
-            var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-            if (i == 0) return bytes + ' ' + sizes[i]; 
-            return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
-          };%>
-          <div style="padding-top:1em" class="row">
-            <div class="col-lg-6">
-                <div class="list-group">
-                    <% for(var i=0; i<files.length; i++){ %>
-                      <%#files.forEach(function(file) { %>
-                      <% var file = files[i]%>
-                      <a href="/file/<%=file.id%>?d=false" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                          <h5 class="mb-1"><%=file.id%></h5>
-                          <small class="text-muted"><%=bytesToSize(file.size)%></small>
-                        </div>
-                        <p class="mb-1"><%=file.size%></p>
-                        <small class="text-muted"><%=file.extension%></small>
-                      </a>
-                    <%# }); %>
-                    <% } %>
-                </div>
+		<div class="bs-docs-section">
+			<%if (document !== null){%>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="page-header">
+							<h1 id="forms"><%=document.title%></h1>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row"><div class="col-lg-6">
+				<legend>Dokumentum adatai</legend>
+				<p><strong>Cím:</strong> <%=document.title%></p>
+				<p><strong>Egyetem:</strong> <%=document.university%></p>
+				<p><strong>Szak, félév:</strong> <%=document.course%>, <%=document.semester%></p>
+				<p><strong>Előadás időpontja:</strong> <%=document.getLectureDateFromNow()%></p>
+				<p><strong>Tanár:</strong> <%=document.teacher%></p>
+				<p><strong>Leírás:</strong> <%=document.description%></p>
+				<p><strong>Feltöltő:</strong> <%=uploader.name%></p>
+				<p><strong>Feltöltés időpontja:</strong> <%=document.getDateFromNow()%></p>
 
+				<p><% document.tags.split(', ').forEach(function(tag) { %>
+					<a href="/search?tags=<%=tag%>"><span class="badge badge-pill badge-primary"><%=tag%></span></a>
+				<% }); %></p>
+				<h3>Fájlok:</h3>
+				<%if (files.length>1){%><a href="/zip/<%=document.id%>"><button type="button" class="btn btn-secondary">Letöltés tömörítve (zip)</button></a><%}%>
+				<%function bytesToSize(bytes) {
+					var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+					if (bytes == 0) return 'n/a';
+					var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+					if (i == 0) return bytes + ' ' + sizes[i]; 
+					return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
+				};%>
+				<!--<div style="padding-top:1em" class="row">-->
+					<!--<div class="col-lg-6">-->
+						<div style="padding-top:1em" class="list-group">
+							<% for(var i=0; i<files.length; i++){ %>
+							<%#files.forEach(function(file) { %>
+							<% var file = files[i]%>
+							<!-- href="/file/<%=file.id%>?d=false" -->
+								<a onclick="change('<%=file.id%>','<%=file.originalname%>', this);" class="list-group-item list-group-item-action flex-column align-items-start">
+									<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1"><%=file.originalname%></h5>
+										<small class="text-muted"><%=bytesToSize(file.size)%></small>
+									</div>
+									<p class="mb-1"><%=file.size%></p>
+									<small class="text-muted"><%=file.extension%></small>
+								</a>
+							<%# }); %>
+							<% } %>
+						</div>
+						<script>
+							var files = toInt('<%=files.length%>');
+							function change(id, originalname, el){
+								var iframe = document.getElementById('previewiframe');
+								var btn = document.getElementById('previewbutton');
+								var link = document.getElementById('buttonlink');
+								iframe.src = 'http://docs.google.com/gview?url=http://ec2-18-195-57-19.eu-central-1.compute.amazonaws.com:3000/file/'+id+'&embedded=true';
+								btn.innerHTML = originalname + ' letöltése';
+								link.setAttribute('href', '/file/'+id+'?d=true');
+							}
+						</script>
+				
                 <!-- Preview a fájlokhoz-->
                 <br>
                 <!-- <div class="list-group"> -->
-                  <% files.forEach(function(file) { %>
+                  <% if (false) files.forEach(function(file) { %>
                     <% if (['doc','docx'].includes(file.extension)) {%>
                     <%#korábban 595px volt:%>
                     <iframe width="100%" height="842px" src="http://docs.google.com/gview?url=http://ec2-18-195-57-19.eu-central-1.compute.amazonaws.com:3000/file/<%=file.id%>&embedded=true"></iframe>
@@ -64,8 +80,14 @@
                     <br>
                   <% }); %>
                 <!-- </div> -->
-
             </div>
+			<%if (files.length != 0) {%><div class="col-lg-6">
+				<legend>Betekintés</legend>
+				<a id="buttonlink" href="/file/<%=files[0].id%>?d=true"><button id='previewbutton' type="button" class="btn btn-secondary"><%=files[0].originalname%> letöltése</button></a>
+				<br><br>
+				<iframe id="previewiframe" width="100%" height="70%" src="http://docs.google.com/gview?url=http://ec2-18-195-57-19.eu-central-1.compute.amazonaws.com:3000/file/<%=files[0].id%>&embedded=true"></iframe>
+			</div>
+			<%}%>
           </div>
 
           <div style='margin-top: 3em' class='row'><div class='col-lg-12'>

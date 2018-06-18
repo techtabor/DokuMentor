@@ -48,6 +48,10 @@ module.exports = function(sequelize, DataTypes){
     return moment(this.add_date).fromNow();
   };
 
+  Document.prototype.getLectureDateFromNow = function () {
+    return moment(this.lecture_date).fromNow();
+  };
+
   Document.associate = function(models) {
     models.Document.hasMany(models.File, {as: 'Files'});
   };
