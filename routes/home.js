@@ -38,6 +38,19 @@ router.get('/document/:docid', (req, res) => {
     });
 });
 
+router.get('/document/:docid/delete', authCheck, (req, res) => {
+    models.Document.findById(req.params.docid).then(document => {
+        if (document != null) {
+            if (req.user.id == document.UserId) {
+                document.destroy({ force: true });
+                res.redirect('/');
+            }
+            else res.render('pages/error', {error: {status: 500}, message: 'Ez nem a Te dokumentumod.'});
+        }
+        else res.render('pages/error', {error: {status: 404}, message: 'Nincs ilyen azonosítójú dokumentum.'});
+    });
+});
+
 const zip = require('express-zip');
 router.get('/zip/:docid', (req, res) => {
     models.Document.findById(req.params.docid).then(document => {

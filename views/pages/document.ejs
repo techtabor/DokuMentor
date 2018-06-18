@@ -13,7 +13,16 @@
 				</div>
 				
 				<div class="row"><div class="col-lg-6">
-				<legend>Dokumentum adatai</legend>
+				<legend>Dokumentum adatai<%if(user && user.id==document.UserId){%> (<a>szerkesztés</a>|<a onclick="deleteDoc();" href="#">törlés</a>)<%}%></legend>
+				<script>
+					function deleteDoc() {
+						var txt;
+						var r = confirm("Biztosan törölni szeretnéd ezt a dokumentumot? A művelet nem vonható vissza.");
+						if (r == true) {
+							window.location = '/document/<%=document.id%>/delete'
+						}
+					}
+				</script>
 				<p><strong>Cím:</strong> <%=document.title%></p>
 				<p><strong>Egyetem:</strong> <%=document.university%></p>
 				<p><strong>Szak, félév:</strong> <%=document.course%>, <%=document.semester%></p>
@@ -54,7 +63,6 @@
 							<% } %>
 						</div>
 						<script>
-							var files = toInt('<%=files.length%>');
 							function change(id, originalname, el){
 								var iframe = document.getElementById('previewiframe');
 								var btn = document.getElementById('previewbutton');
