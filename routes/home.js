@@ -64,6 +64,7 @@ router.get('/file/:fileid', (req, res) => {
                 if (download) res.download('./files/'+file.id+'.'+file.extension);
                 else res.sendFile(path.resolve(__dirname,'../files/'+file.id+'.'+file.extension));
             }
+            else res.send('A fájl nem található a szerveren.');
         });
         else res.send('A fájl nem található a szerveren.');
     });

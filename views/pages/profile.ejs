@@ -13,6 +13,32 @@
               <p>Email: <%=user.email%></p>
               <p>Azonosító: <%=user.key%></p>
               <p>Csatlakozott: <%=user.add_date%></p>
+              <br>
+              <h4>Saját dokumentumok (<%= documents.length%> db):</h4>
+              <div style="overflow: scroll; height:400px;"><table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Cím</th>
+                    <th scope="col">Egyetem</th>
+                    <th scope="col">Szak</th>
+                    <th scope="col">Félév</th>
+                    <th scope="col">Feltöltés</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% documents.forEach(doc => {%>
+                    <tr>
+                      <td><a href="/document/<%=doc.id%>"><%=doc.title%></a></td>
+                      <td><%if(doc.university.includes(' - ')) {%> <%=doc.university.split(' - ')[0] %> <%} else {%> <%=doc.university%> <%}%></td>
+                      <td><%=doc.course%></td>
+                      <td><%=doc.semester%></td>
+                      <td><%=doc.getDateFromNow()%></td>
+                    </tr>
+                    <!-- <a href="/document/<%=doc.id%>"><%=doc.title%></a><br> -->
+                  <%});%>
+                </tbody>
+              </table>
+              </div>
             </div>
           </div>
         </div>
