@@ -24,7 +24,7 @@ var sequelize = new Sequelize(config.databaseconnection.database,
     dialectOptions: {
       useUTC: false
     },
-    timezone: '+02:00',
+    timezone: '+00:00',
     logging: false,
     operatorsAliases: false
   });
