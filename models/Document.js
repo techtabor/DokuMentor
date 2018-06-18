@@ -54,6 +54,7 @@ module.exports = function(sequelize, DataTypes){
 
   Document.associate = function(models) {
     models.Document.hasMany(models.File, {as: 'Files'});
+    models.Document.hasMany(models.Rating, {as: 'Ratings'});
   };
 
   Document.getUniversities = function(models, callback) {

@@ -11,6 +11,7 @@ router.use('/', require('./newdocument'));
 router.use('/auth', require('./auth'));
 router.use('/profile', require('./profile'));
 router.use('/', require('./advsearch'));
+router.use('/rating', require('./rating.js'));
 
 if(process.env.NODE_ENV == 'development') router.use('/dev', require('./dev'));
 

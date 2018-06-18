@@ -29,6 +29,7 @@ module.exports = function(sequelize, DataTypes) {
 
   User.associate = function(models) {
     models.User.hasMany(models.Document, {as: 'Documents'});
+    models.User.hasMany(models.Rating, {as: "Ratings"});
   };
 
   return User;

@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<p>Eddigi értékelések száma: <%= ratings.length %> </p>
+<p>Átlag értékelés: <%= ratings.avg %> </p>
+<p> Te ennyire értékelted:
+    <% if(ratings.mine == 0) { %>
+        Még nem értékelted. Ezt megteheted az alábbi csillagok közül a megfelelőre kattintva.
+    <% }else{ %>
+        <%= ratings.mine %>
+    <% } %>
+</p>
+<p> Értékelem:
+
+<% for(var i=1; i<=5; i++) { 
+    var link = "/rating/rate/" + ratings.docid + "/" + i;
+    if(i <= ratings.mine) { %>
+        <a href="<%= link %>" > <span class="fa fa-star checked"></span> </a>
+    <% }else{ %>
+        <a href="<%= link %>" ><span class="fa fa-star"></span></a>
+    <% } %>
+<% } %>
+
+
+<style>
+.checked{
+    color: orange;
+}
+</style>

@@ -23,6 +23,9 @@
 						}
 					}
 				</script>
+				<strong>
+					<%- include('../partials/rating-module.ejs', {ratings: ratings}); %>
+				</strong>
 				<p><strong>Cím:</strong> <%=document.title%></p>
 				<p><strong>Egyetem:</strong> <%=document.university%></p>
 				<p><strong>Szak, félév:</strong> <%=document.course%>, <%=document.semester%></p>
