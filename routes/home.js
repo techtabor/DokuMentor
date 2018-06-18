@@ -61,17 +61,17 @@ router.get('/zip/:docid', (req, res) => {
 router.get('/file/:fileid', (req, res) => {
     var download = false;
     if (typeof req.query.d !== 'undefined') download=true;
-    var direct = false;
-    if (typeof req.query.di !== 'undefined') direct=true;
+    /*var direct = false;
+    if (typeof req.query.di !== 'undefined') direct=true;*/
     models.File.findById(req.params.fileid).then(file => {
         if (file != null) fs.exists('./files/'+file.id+'.'+file.extension, function(exists) {
             if(exists){
                 if (download) res.download('./files/'+file.id+'.'+file.extension,file.originalname);
                 else {
-                    if (['jpg','png'].includes(file.extension) && !direct) {
+                    /*if (['jpg','png'].includes(file.extension) && !direct) {
                         res.render('partials/img', { id: file.id });
                     }
-                    else res.sendFile(path.resolve(__dirname,'../files/'+file.id+'.'+file.extension));
+                    else*/ res.sendFile(path.resolve(__dirname,'../files/'+file.id+'.'+file.extension));
                 }
             }
             else res.send('A fájl nem található a szerveren.');
