@@ -6,6 +6,34 @@ var fs = require('fs');
 
 const models = require('../models/');
 
+//GERGŐ: ide helyeztem a rating_info fv-t
+function rating_info(req, docid, callback){
+    var sum = 0, length = 0;
+    models.Rating.findAll({where: {DocumentId: docid}}).then( (result) => {
+        length = result.length;
+        var mine = 0;
+        for(var i=0; i<result.length; i++){
+            //console.log("******");
+            var akt = result[i].dataValues;
+            sum += akt.value;
+            if(req.isAuthenticated() && akt.UserId == req.user.id){
+                mine = akt.value;
+            }
+        }
+        console.log(sum);
+        var avg = "Még nincs értékelés.";
+        if(length > 0) avg = sum/length
+        callback({
+            mine: mine,
+            avg: avg,
+            length: length,
+            docid: req.params.docid
+        });
+    });
+}
+//---------------------------------------
+
+
 const authCheck = (req, res, next) => {
     if(!req.isAuthenticated()){
         res.redirect('../auth/login');
@@ -21,7 +49,10 @@ router.get('/', (req, res) => {
 router.get('/document/:docid', (req, res) => {
     models.Document.findById(req.params.docid).then(document => {
         models.File.findAll({where: {DocumentId: req.params.docid}}).then( (result) => {
-            res.render('pages/document', { user: req.user, document: document, files: result});
+            rating_info(req, req.params.docid, (ratings) => {
+                res.render('pages/document', { user: req.user, document: document, files: result, ratings: ratings});
+            });
+            
         });
     });
 });

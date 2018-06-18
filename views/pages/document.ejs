@@ -10,6 +10,7 @@
               </div>
             </div>
           </div>
+          <%- include('../partials/rating-module.ejs', {ratings: ratings}) %>
           <%if (document !== null){%>
           <p>Cím: <%=document.title%></p>
           <p>Egyetem: <%=document.university%></p>
