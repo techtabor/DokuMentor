@@ -38,6 +38,18 @@
 				<p><% document.tags.split(', ').forEach(function(tag) { %>
 					<a href="/search?tags=<%=tag%>"><span class="badge badge-pill badge-primary"><%=tag%></span></a>
 				<% }); %></p>
+				<button class="btn btn-secondary" onclick="copyToClipboard('http://ec2-18-195-57-19.eu-central-1.compute.amazonaws.com:3000/document/<%=document.id%>');">Link másolása</button>
+				<br><br>
+				<script>
+					const copyToClipboard = str => {
+						const el = document.createElement('textarea');
+						el.value = str;
+						document.body.appendChild(el);
+						el.select();
+						document.execCommand('copy');
+						document.body.removeChild(el);
+					};
+				</script>
 				<h3>Fájlok:</h3>
 				<%if (files.length>1){%><a href="/zip/<%=document.id%>"><button type="button" class="btn btn-secondary">Letöltés tömörítve (zip)</button></a><%}%>
 				<%function bytesToSize(bytes) {
